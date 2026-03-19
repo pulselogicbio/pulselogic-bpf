@@ -27,7 +27,7 @@ def write_executive_summary(
     path.parent.mkdir(parents=True, exist_ok=True)
 
     lines = [
-        "PulseLogic BPF — Executive Summary",
+        "PulseLogic BPF - Executive Summary",
         "==================================",
         "",
         f"Package version: {package_version}",
