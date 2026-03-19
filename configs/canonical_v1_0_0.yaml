@@ -13,3 +13,5 @@ outputs:
   base_dir: outputs
   auc_table: demo_auc_ranking.csv
   fused_scores: demo_fused_scores.csv
+  audit_json: demo_run_audit.json
+  checkpoint_json: demo_checkpoint_log.json
