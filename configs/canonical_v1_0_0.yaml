@@ -6,6 +6,10 @@ inputs:
   expression_matrix: examples/toy_expression.csv
   labels: examples/toy_labels.csv
 
+analysis:
+  top_n_features: 3
+
 outputs:
   base_dir: outputs
   auc_table: demo_auc_ranking.csv
+  fused_scores: demo_fused_scores.csv

@@ -1,0 +1,3 @@
+DEFAULT_RANDOM_SEED = 42
+DEFAULT_OUTPUT_DIR = "outputs"
+DEFAULT_CONFIG_PATH = "configs/canonical_v1_0_0.yaml"
