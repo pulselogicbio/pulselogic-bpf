@@ -16,3 +16,4 @@ outputs:
   audit_json: demo_run_audit.json
   checkpoint_json: demo_checkpoint_log.json
   manifest_json: demo_run_manifest.json
+  executive_summary_txt: EXECUTIVE_SUMMARY.txt

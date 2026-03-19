@@ -47,3 +47,12 @@ This repository is public-safe by design and does **not** include:
 ```bash
 pip install -r requirements.txt
 pip install -e .
+
+## Demo Outputs
+
+- `outputs/demo_auc_ranking.csv`
+- `outputs/demo_fused_scores.csv`
+- `outputs/demo_run_audit.json`
+- `outputs/demo_checkpoint_log.json`
+- `outputs/demo_run_manifest.json`
+- `outputs/EXECUTIVE_SUMMARY.txt`

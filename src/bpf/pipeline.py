@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 import yaml
@@ -8,10 +9,13 @@ from bpf.ranking.auc_ranker import compute_feature_auc_table
 from bpf.fusion.scorer import compute_fused_scores
 from bpf.compliance.audit import build_run_audit
 from bpf.compliance.checkpoint import build_checkpoint_log
+from bpf.reports.executive import write_executive_summary
+from bpf.version import __version__
 
 
-def run_pipeline(config_path: str | Path) -> dict[str, Any]:
+def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> dict[str, Any]:
     config_path = Path(config_path)
+    timestamp_utc = datetime.now(timezone.utc).isoformat()
 
     with config_path.open("r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
@@ -28,6 +32,7 @@ def run_pipeline(config_path: str | Path) -> dict[str, Any]:
     audit_output_path = output_dir / config["outputs"]["audit_json"]
     checkpoint_output_path = output_dir / config["outputs"]["checkpoint_json"]
     manifest_output_path = output_dir / config["outputs"]["manifest_json"]
+    executive_summary_path = output_dir / config["outputs"]["executive_summary_txt"]
 
     expression_df = load_csv(expression_path)
     labels_df = load_csv(labels_path)
@@ -55,8 +60,13 @@ def run_pipeline(config_path: str | Path) -> dict[str, Any]:
     write_json(checkpoint, checkpoint_output_path)
 
     manifest = {
+        "package_version": __version__,
         "canonical_version": config["canonical_version"],
         "run_label": config["run_label"],
+        "timestamp_utc": timestamp_utc,
+        "invocation_mode": invocation_mode,
+        "config_path": str(config_path),
+        "manifest_path": str(manifest_output_path),
         "random_seed": config["random_seed"],
         "top_n_features": top_n_features,
         "selected_top_features": top_features,
@@ -71,9 +81,32 @@ def run_pipeline(config_path: str | Path) -> dict[str, Any]:
             "fused_scores": str(fused_output_path),
             "audit_json": str(audit_output_path),
             "checkpoint_json": str(checkpoint_output_path),
+            "executive_summary_txt": str(executive_summary_path),
         },
     }
     write_json(manifest, manifest_output_path)
+
+    write_executive_summary(
+        executive_summary_path,
+        package_version=__version__,
+        canonical_version=config["canonical_version"],
+        run_label=config["run_label"],
+        random_seed=config["random_seed"],
+        timestamp_utc=timestamp_utc,
+        config_path=str(config_path),
+        invocation_mode=invocation_mode,
+        top_features=top_features,
+        expression_rows=len(expression_df),
+        labels_rows=len(labels_df),
+        auc_rows=len(auc_df),
+        fused_rows=len(fused_df),
+        checkpoint_status=checkpoint["status"],
+        auc_output_path=str(auc_output_path),
+        fused_output_path=str(fused_output_path),
+        audit_output_path=str(audit_output_path),
+        checkpoint_output_path=str(checkpoint_output_path),
+        manifest_output_path=str(manifest_output_path),
+    )
 
     return {
         "auc_output_path": auc_output_path,
@@ -81,5 +114,6 @@ def run_pipeline(config_path: str | Path) -> dict[str, Any]:
         "audit_output_path": audit_output_path,
         "checkpoint_output_path": checkpoint_output_path,
         "manifest_output_path": manifest_output_path,
+        "executive_summary_path": executive_summary_path,
         "top_features": top_features,
     }

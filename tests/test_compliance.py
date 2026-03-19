@@ -15,6 +15,7 @@ def test_build_checkpoint_log_passes_with_valid_inputs():
     assert result["checks"]["top_features_present"] is True
 
 
-def test_run_pipeline_writes_manifest():
+def test_run_pipeline_writes_manifest_and_summary():
     result = run_pipeline("configs/canonical_v1_0_0.yaml")
     assert result["manifest_output_path"].exists()
+    assert result["executive_summary_path"].exists()
