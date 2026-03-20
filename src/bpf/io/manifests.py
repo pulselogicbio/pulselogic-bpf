@@ -27,5 +27,13 @@ def validate_run_config(config: dict[str, Any]) -> None:
         "executive_summary_txt",
     ]
     for key in required_output_keys:
-        if key not in config["outputs"]:
-            raise ValueError(f"Missing required output config key: outputs.{key}")
+        required_output_keys = [
+    "base_dir",
+    "auc_table",
+    "fused_scores",
+    "audit_json",
+    "checkpoint_json",
+    "manifest_json",
+    "executive_summary_txt",
+    "quarantine_json",
+]
