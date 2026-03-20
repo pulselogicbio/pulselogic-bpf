@@ -14,6 +14,7 @@ from bpf.validation.bootstrap import (
     build_feature_stability_summary,
     build_feature_auc_bootstrap_summary,
 )
+from bpf.selection.policy import build_feature_selection_policy
 from bpf.compliance.audit import build_run_audit
 from bpf.compliance.checkpoint import build_checkpoint_log
 from bpf.compliance.quarantine import write_quarantine_record
@@ -44,6 +45,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
         bootstrap_summary_path = output_dir / config["outputs"]["bootstrap_summary_json"]
         feature_stability_path = output_dir / config["outputs"]["feature_stability_json"]
         feature_auc_bootstrap_path = output_dir / config["outputs"]["feature_auc_bootstrap_json"]
+        feature_selection_policy_path = output_dir / config["outputs"]["feature_selection_policy_json"]
         auc_output_path = output_dir / config["outputs"]["auc_table"]
         fused_output_path = output_dir / config["outputs"]["fused_scores"]
         audit_output_path = output_dir / config["outputs"]["audit_json"]
@@ -71,6 +73,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
         bootstrap_summary = None
         feature_stability_summary = None
         feature_auc_bootstrap_summary = None
+        feature_selection_policy = None
 
         if bool(config["analysis"]["bootstrap_enabled"]):
             ci_percentiles = tuple(config["analysis"]["bootstrap_ci_percentiles"])
@@ -109,6 +112,16 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
             )
             write_json(feature_auc_bootstrap_summary, feature_auc_bootstrap_path)
 
+            feature_selection_policy = build_feature_selection_policy(
+                feature_stability_summary,
+                feature_auc_bootstrap_summary,
+                min_stability_frequency=float(config["analysis"]["selection_min_stability_frequency"]),
+                min_auc_margin=float(config["analysis"]["selection_min_auc_margin"]),
+                max_ci_width=float(config["analysis"]["selection_max_ci_width"]),
+                reject_auc_margin=float(config["analysis"]["selection_reject_auc_margin"]),
+            )
+            write_json(feature_selection_policy, feature_selection_policy_path)
+
         audit = build_run_audit(
             config_path=config_path,
             expression_path=expression_path,
@@ -144,6 +157,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
                 "bootstrap_summary_json": sha256_file(bootstrap_summary_path) if bootstrap_summary is not None else None,
                 "feature_stability_json": sha256_file(feature_stability_path) if feature_stability_summary is not None else None,
                 "feature_auc_bootstrap_json": sha256_file(feature_auc_bootstrap_path) if feature_auc_bootstrap_summary is not None else None,
+                "feature_selection_policy_json": sha256_file(feature_selection_policy_path) if feature_selection_policy is not None else None,
             },
             "selected_top_features": top_features,
         }
@@ -178,6 +192,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
                 "bootstrap_summary_json": str(bootstrap_summary_path),
                 "feature_stability_json": str(feature_stability_path),
                 "feature_auc_bootstrap_json": str(feature_auc_bootstrap_path),
+                "feature_selection_policy_json": str(feature_selection_policy_path),
             },
         }
         write_json(manifest, manifest_output_path)
@@ -216,6 +231,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
             "bootstrap_summary_path": bootstrap_summary_path,
             "feature_stability_path": feature_stability_path,
             "feature_auc_bootstrap_path": feature_auc_bootstrap_path,
+            "feature_selection_policy_path": feature_selection_policy_path,
             "top_features": top_features,
         }
 

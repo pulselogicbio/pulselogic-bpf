@@ -15,6 +15,7 @@ def main() -> None:
     print(f"Wrote bootstrap summary to: {result['bootstrap_summary_path']}")
     print(f"Wrote feature stability to: {result['feature_stability_path']}")
     print(f"Wrote feature AUC bootstrap summary to: {result['feature_auc_bootstrap_path']}")
+    print(f"Wrote feature selection policy to: {result['feature_selection_policy_path']}")
     print(f"Top features used: {result['top_features']}")
 
 

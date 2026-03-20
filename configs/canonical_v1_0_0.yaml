@@ -13,6 +13,10 @@ analysis:
   bootstrap_enabled: true
   bootstrap_iterations: 100
   bootstrap_ci_percentiles: [2.5, 97.5]
+  selection_min_stability_frequency: 0.80
+  selection_min_auc_margin: 0.20
+  selection_max_ci_width: 0.25
+  selection_reject_auc_margin: 0.05
 
 outputs:
   base_dir: outputs
@@ -27,3 +31,4 @@ outputs:
   bootstrap_summary_json: BOOTSTRAP_SUMMARY.json
   feature_stability_json: FEATURE_STABILITY.json
   feature_auc_bootstrap_json: FEATURE_AUC_BOOTSTRAP.json
+  feature_selection_policy_json: FEATURE_SELECTION_POLICY.json

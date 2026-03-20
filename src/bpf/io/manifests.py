@@ -19,6 +19,10 @@ def validate_run_config(config: dict[str, Any]) -> None:
     "bootstrap_enabled",
     "bootstrap_iterations",
     "bootstrap_ci_percentiles",
+    "selection_min_stability_frequency",
+    "selection_min_auc_margin",
+    "selection_max_ci_width",
+    "selection_reject_auc_margin",
 ]
 
     required_output_keys = [
@@ -34,6 +38,7 @@ def validate_run_config(config: dict[str, Any]) -> None:
     "bootstrap_summary_json",
     "feature_stability_json",
     "feature_auc_bootstrap_json",
+    "feature_selection_policy_json",
 ]
     for key in required_output_keys:
         required_output_keys = [
