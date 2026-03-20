@@ -16,6 +16,9 @@ def test_validate_run_config_accepts_valid_config():
             "top_n_features": 3,
             "use_direction_aware_fusion": True,
             "use_auc_weights": True,
+            "bootstrap_enabled": True,
+            "bootstrap_iterations": 100,
+            "bootstrap_ci_percentiles": [2.5, 97.5],
         },
         "outputs": {
             "base_dir": "outputs",
@@ -27,6 +30,7 @@ def test_validate_run_config_accepts_valid_config():
             "executive_summary_txt": "EXECUTIVE_SUMMARY.txt",
             "quarantine_json": "QUARANTINE.json",
             "run_fingerprint_json": "RUN_FINGERPRINT.json",
+            "bootstrap_summary_json": "BOOTSTRAP_SUMMARY.json",
         },
     }
 

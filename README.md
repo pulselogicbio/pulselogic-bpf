@@ -57,3 +57,4 @@ pip install -e .
 - `outputs/demo_run_manifest.json`
 - `outputs/EXECUTIVE_SUMMARY.txt`
 - `outputs/RUN_FINGERPRINT.json`
+- `outputs/BOOTSTRAP_SUMMARY.json`

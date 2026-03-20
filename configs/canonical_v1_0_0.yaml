@@ -10,6 +10,9 @@ analysis:
   top_n_features: 3
   use_direction_aware_fusion: true
   use_auc_weights: true
+  bootstrap_enabled: true
+  bootstrap_iterations: 100
+  bootstrap_ci_percentiles: [2.5, 97.5]
 
 outputs:
   base_dir: outputs
@@ -21,3 +24,4 @@ outputs:
   executive_summary_txt: EXECUTIVE_SUMMARY.txt
   quarantine_json: QUARANTINE.json
   run_fingerprint_json: RUN_FINGERPRINT.json
+  bootstrap_summary_json: BOOTSTRAP_SUMMARY.json

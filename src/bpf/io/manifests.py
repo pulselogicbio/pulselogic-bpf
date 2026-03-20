@@ -16,6 +16,9 @@ def validate_run_config(config: dict[str, Any]) -> None:
     "top_n_features",
     "use_direction_aware_fusion",
     "use_auc_weights",
+    "bootstrap_enabled",
+    "bootstrap_iterations",
+    "bootstrap_ci_percentiles",
 ]
 
     required_output_keys = [
@@ -39,4 +42,6 @@ def validate_run_config(config: dict[str, Any]) -> None:
     "manifest_json",
     "executive_summary_txt",
     "quarantine_json",
+    "run_fingerprint_json",
+    "bootstrap_summary_json",
 ]

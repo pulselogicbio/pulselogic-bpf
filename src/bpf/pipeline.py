@@ -1,3 +1,5 @@
+from bpf.validation.bootstrap import build_bootstrap_summary
+
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -36,6 +38,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
 
         quarantine_output_path = output_dir / config["outputs"]["quarantine_json"]
         fingerprint_output_path = output_dir / config["outputs"]["run_fingerprint_json"]
+        bootstrap_summary_path = output_dir / config["outputs"]["bootstrap_summary_json"]
         auc_output_path = output_dir / config["outputs"]["auc_table"]
         fused_output_path = output_dir / config["outputs"]["fused_scores"]
         audit_output_path = output_dir / config["outputs"]["audit_json"]
