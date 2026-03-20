@@ -15,6 +15,7 @@ from bpf.validation.bootstrap import (
     build_feature_auc_bootstrap_summary,
 )
 from bpf.selection.policy import build_feature_selection_policy
+from bpf.selection.assembly import build_model_assembly
 from bpf.compliance.audit import build_run_audit
 from bpf.compliance.checkpoint import build_checkpoint_log
 from bpf.compliance.quarantine import write_quarantine_record
@@ -46,6 +47,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
         feature_stability_path = output_dir / config["outputs"]["feature_stability_json"]
         feature_auc_bootstrap_path = output_dir / config["outputs"]["feature_auc_bootstrap_json"]
         feature_selection_policy_path = output_dir / config["outputs"]["feature_selection_policy_json"]
+        model_assembly_path = output_dir / config["outputs"]["model_assembly_json"]
         auc_output_path = output_dir / config["outputs"]["auc_table"]
         fused_output_path = output_dir / config["outputs"]["fused_scores"]
         audit_output_path = output_dir / config["outputs"]["audit_json"]
@@ -74,6 +76,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
         feature_stability_summary = None
         feature_auc_bootstrap_summary = None
         feature_selection_policy = None
+        model_assembly = None
 
         if bool(config["analysis"]["bootstrap_enabled"]):
             ci_percentiles = tuple(config["analysis"]["bootstrap_ci_percentiles"])
@@ -122,6 +125,12 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
             )
             write_json(feature_selection_policy, feature_selection_policy_path)
 
+            model_assembly = build_model_assembly(
+                auc_df,
+                feature_selection_policy,
+            )
+            write_json(model_assembly, model_assembly_path)
+
         audit = build_run_audit(
             config_path=config_path,
             expression_path=expression_path,
@@ -158,6 +167,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
                 "feature_stability_json": sha256_file(feature_stability_path) if feature_stability_summary is not None else None,
                 "feature_auc_bootstrap_json": sha256_file(feature_auc_bootstrap_path) if feature_auc_bootstrap_summary is not None else None,
                 "feature_selection_policy_json": sha256_file(feature_selection_policy_path) if feature_selection_policy is not None else None,
+                "model_assembly_json": sha256_file(model_assembly_path) if model_assembly is not None else None,
             },
             "selected_top_features": top_features,
         }
@@ -193,6 +203,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
                 "feature_stability_json": str(feature_stability_path),
                 "feature_auc_bootstrap_json": str(feature_auc_bootstrap_path),
                 "feature_selection_policy_json": str(feature_selection_policy_path),
+                "model_assembly_json": str(model_assembly_path),
             },
         }
         write_json(manifest, manifest_output_path)
@@ -232,6 +243,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
             "feature_stability_path": feature_stability_path,
             "feature_auc_bootstrap_path": feature_auc_bootstrap_path,
             "feature_selection_policy_path": feature_selection_policy_path,
+            "model_assembly_path": model_assembly_path,
             "top_features": top_features,
         }
 

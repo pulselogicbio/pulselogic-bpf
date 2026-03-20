@@ -7,20 +7,6 @@ def build_feature_selection_policy(
     max_ci_width: float = 0.25,
     reject_auc_margin: float = 0.05,
 ) -> dict:
-    """
-    Build a decision-layer policy for feature selection.
-
-    A feature is selected if:
-    - it is frequently selected across bootstrap resamples
-    - its mean AUC is meaningfully far from 0.5
-    - its bootstrap CI width is reasonably tight
-
-    A feature is rejected if:
-    - its mean AUC is too close to 0.5
-
-    Otherwise it is classified as unstable.
-    """
-
     stability_freq = feature_stability_summary.get("feature_frequency", {})
     auc_summary = feature_auc_bootstrap_summary.get("feature_auc_summary", {})
 
@@ -33,8 +19,8 @@ def build_feature_selection_policy(
 
     for feature in all_features:
         stability = float(stability_freq.get(feature, 0.0))
-
         auc_info = auc_summary.get(feature)
+
         if auc_info is None:
             feature_decisions[feature] = {
                 "decision": "unstable",
@@ -48,16 +34,19 @@ def build_feature_selection_policy(
         ci_lower = float(auc_info["ci_lower"])
         ci_upper = float(auc_info["ci_upper"])
         ci_width = ci_upper - ci_lower
-        auc_margin = abs(mean_auc - 0.5)
+
+        direction = "positive" if mean_auc >= 0.5 else "inverse"
+        adjusted_auc = max(mean_auc, 1.0 - mean_auc)
+        adjusted_auc_margin = adjusted_auc - 0.5
 
         if (
             stability >= min_stability_frequency
-            and auc_margin >= min_auc_margin
+            and adjusted_auc_margin >= min_auc_margin
             and ci_width <= max_ci_width
         ):
             decision = "selected"
             selected_features.append(feature)
-        elif auc_margin < reject_auc_margin:
+        elif adjusted_auc_margin < reject_auc_margin:
             decision = "rejected"
             rejected_features.append(feature)
         else:
@@ -66,12 +55,14 @@ def build_feature_selection_policy(
 
         feature_decisions[feature] = {
             "decision": decision,
+            "direction": direction,
             "stability_frequency": stability,
             "mean_auc": mean_auc,
+            "adjusted_auc": adjusted_auc,
             "ci_lower": ci_lower,
             "ci_upper": ci_upper,
             "ci_width": ci_width,
-            "auc_margin_from_0_5": auc_margin,
+            "adjusted_auc_margin_from_0_5": adjusted_auc_margin,
         }
 
     return {

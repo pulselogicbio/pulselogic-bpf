@@ -33,3 +33,6 @@ def test_build_feature_selection_policy_classifies_features():
     assert "BMK2" in result["selected_features"]
     assert "BMK3" in result["unstable_features"]
     assert "BMK4" in result["rejected_features"]
+
+    assert result["feature_decisions"]["BMK2"]["direction"] == "inverse"
+    assert result["feature_decisions"]["BMK2"]["adjusted_auc"] == 0.9

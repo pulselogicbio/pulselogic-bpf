@@ -32,3 +32,4 @@ outputs:
   feature_stability_json: FEATURE_STABILITY.json
   feature_auc_bootstrap_json: FEATURE_AUC_BOOTSTRAP.json
   feature_selection_policy_json: FEATURE_SELECTION_POLICY.json
+  model_assembly_json: MODEL_ASSEMBLY.json

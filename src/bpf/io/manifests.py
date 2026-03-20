@@ -39,6 +39,7 @@ def validate_run_config(config: dict[str, Any]) -> None:
     "feature_stability_json",
     "feature_auc_bootstrap_json",
     "feature_selection_policy_json",
+    "model_assembly_json",
 ]
     for key in required_output_keys:
         required_output_keys = [
