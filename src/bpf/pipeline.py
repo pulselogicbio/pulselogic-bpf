@@ -161,6 +161,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
             "executive_summary_path": executive_summary_path,
             "quarantine_output_path": quarantine_output_path,
             "fingerprint_output_path": fingerprint_output_path,
+            "bootstrap_summary_path": bootstrap_summary_path,
             "top_features": top_features,
         }
 
