@@ -31,6 +31,8 @@ def test_validate_run_config_accepts_valid_config():
             "quarantine_json": "QUARANTINE.json",
             "run_fingerprint_json": "RUN_FINGERPRINT.json",
             "bootstrap_summary_json": "BOOTSTRAP_SUMMARY.json",
+            "feature_stability_json": "FEATURE_STABILITY.json",
+            "feature_auc_bootstrap_json": "FEATURE_AUC_BOOTSTRAP.json",
         },
     }
 

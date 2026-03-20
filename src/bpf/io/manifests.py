@@ -31,6 +31,9 @@ def validate_run_config(config: dict[str, Any]) -> None:
     "executive_summary_txt",
     "quarantine_json",
     "run_fingerprint_json",
+    "bootstrap_summary_json",
+    "feature_stability_json",
+    "feature_auc_bootstrap_json",
 ]
     for key in required_output_keys:
         required_output_keys = [

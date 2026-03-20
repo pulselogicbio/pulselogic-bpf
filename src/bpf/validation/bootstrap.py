@@ -58,26 +58,7 @@ def build_feature_stability_summary(
     label_col: str = "label",
     random_seed: int = 42,
 ) -> dict:
-    """
-    Estimate feature-selection stability under bootstrap resampling.
-
-    For each bootstrap iteration:
-    - resample rows with replacement from expression_df
-    - align labels_df to the resampled sample IDs
-    - recompute per-feature AUC ranking
-    - record the top_n_features selected in that resample
-
-    Returns:
-        {
-            "iterations": int,
-            "top_n_features": int,
-            "random_seed": int,
-            "feature_counts": {feature: count, ...},
-            "feature_frequency": {feature: frequency, ...}
-        }
-    """
     from collections import Counter
-
     from bpf.ranking.auc_ranker import compute_feature_auc_table
 
     if sample_col not in expression_df.columns:
@@ -131,4 +112,73 @@ def build_feature_stability_summary(
         "random_seed": int(random_seed),
         "feature_counts": feature_counts,
         "feature_frequency": feature_frequency,
+    }
+
+
+def build_feature_auc_bootstrap_summary(
+    expression_df: pd.DataFrame,
+    labels_df: pd.DataFrame,
+    *,
+    iterations: int = 100,
+    ci_percentiles: tuple[float, float] = (2.5, 97.5),
+    sample_col: str = "sample_id",
+    label_col: str = "label",
+    random_seed: int = 42,
+) -> dict:
+    from collections import defaultdict
+    from bpf.ranking.auc_ranker import compute_feature_auc_table
+
+    if sample_col not in expression_df.columns:
+        raise ValueError(f"Expression data missing required column: {sample_col}")
+
+    if sample_col not in labels_df.columns:
+        raise ValueError(f"Labels data missing required column: {sample_col}")
+
+    if label_col not in labels_df.columns:
+        raise ValueError(f"Labels data missing required column: {label_col}")
+
+    if iterations <= 0:
+        raise ValueError("iterations must be > 0")
+
+    rng = np.random.default_rng(random_seed)
+    lower_p, upper_p = ci_percentiles
+    auc_store: dict[str, list[float]] = defaultdict(list)
+
+    for _ in range(iterations):
+        sample_idx = rng.choice(len(expression_df), size=len(expression_df), replace=True)
+        boot_expression_df = expression_df.iloc[sample_idx].reset_index(drop=True)
+
+        boot_labels_df = labels_df.merge(
+            boot_expression_df[[sample_col]],
+            on=sample_col,
+            how="inner",
+        )
+
+        auc_df = compute_feature_auc_table(
+            boot_expression_df,
+            boot_labels_df,
+            sample_col=sample_col,
+            label_col=label_col,
+        )
+
+        for _, row in auc_df.iterrows():
+            auc_store[str(row["feature"])].append(float(row["auc"]))
+
+    feature_summaries = {}
+    for feature in sorted(auc_store.keys()):
+        values = np.array(auc_store[feature], dtype=float)
+        feature_summaries[feature] = {
+            "n": int(len(values)),
+            "mean_auc": float(np.mean(values)),
+            "std_auc": float(np.std(values, ddof=0)),
+            "ci_percentiles": [lower_p, upper_p],
+            "ci_lower": float(np.percentile(values, lower_p)),
+            "ci_upper": float(np.percentile(values, upper_p)),
+        }
+
+    return {
+        "iterations": int(iterations),
+        "random_seed": int(random_seed),
+        "ci_percentiles": [lower_p, upper_p],
+        "feature_auc_summary": feature_summaries,
     }
