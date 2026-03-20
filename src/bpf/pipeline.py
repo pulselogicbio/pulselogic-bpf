@@ -6,6 +6,7 @@ import yaml
 from bpf.io.loaders import load_csv
 from bpf.io.writers import write_json
 from bpf.io.manifests import validate_run_config
+from bpf.io.hashing import sha256_file, build_run_fingerprint
 from bpf.ranking.auc_ranker import compute_feature_auc_table
 from bpf.fusion.scorer import compute_fused_scores
 from bpf.compliance.audit import build_run_audit
@@ -34,6 +35,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
         output_dir.mkdir(parents=True, exist_ok=True)
 
         quarantine_output_path = output_dir / config["outputs"]["quarantine_json"]
+        fingerprint_output_path = output_dir / config["outputs"]["run_fingerprint_json"]
         auc_output_path = output_dir / config["outputs"]["auc_table"]
         fused_output_path = output_dir / config["outputs"]["fused_scores"]
         audit_output_path = output_dir / config["outputs"]["audit_json"]
@@ -67,6 +69,29 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
         )
         write_json(checkpoint, checkpoint_output_path)
 
+        fingerprint_payload = {
+            "package_version": __version__,
+            "canonical_version": config["canonical_version"],
+            "run_label": config["run_label"],
+            "timestamp_utc": timestamp_utc,
+            "invocation_mode": invocation_mode,
+            "config_path": str(config_path),
+            "config_sha256": sha256_file(config_path),
+            "input_hashes": {
+                "expression_matrix": sha256_file(expression_path),
+                "labels": sha256_file(labels_path),
+            },
+            "output_hashes": {
+                "auc_table": sha256_file(auc_output_path),
+                "fused_scores": sha256_file(fused_output_path),
+                "audit_json": sha256_file(audit_output_path),
+                "checkpoint_json": sha256_file(checkpoint_output_path),
+            },
+            "selected_top_features": top_features,
+        }
+        fingerprint = build_run_fingerprint(fingerprint_payload)
+        write_json(fingerprint, fingerprint_output_path)
+
         manifest = {
             "package_version": __version__,
             "canonical_version": config["canonical_version"],
@@ -91,6 +116,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
                 "checkpoint_json": str(checkpoint_output_path),
                 "executive_summary_txt": str(executive_summary_path),
                 "quarantine_json": str(quarantine_output_path),
+                "run_fingerprint_json": str(fingerprint_output_path),
             },
         }
         write_json(manifest, manifest_output_path)
@@ -125,6 +151,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
             "manifest_output_path": manifest_output_path,
             "executive_summary_path": executive_summary_path,
             "quarantine_output_path": quarantine_output_path,
+            "fingerprint_output_path": fingerprint_output_path,
             "top_features": top_features,
         }
 

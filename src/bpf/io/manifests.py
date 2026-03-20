@@ -18,14 +18,16 @@ def validate_run_config(config: dict[str, Any]) -> None:
             raise ValueError(f"Missing required analysis config key: analysis.{key}")
 
     required_output_keys = [
-        "base_dir",
-        "auc_table",
-        "fused_scores",
-        "audit_json",
-        "checkpoint_json",
-        "manifest_json",
-        "executive_summary_txt",
-    ]
+    "base_dir",
+    "auc_table",
+    "fused_scores",
+    "audit_json",
+    "checkpoint_json",
+    "manifest_json",
+    "executive_summary_txt",
+    "quarantine_json",
+    "run_fingerprint_json",
+]
     for key in required_output_keys:
         required_output_keys = [
     "base_dir",

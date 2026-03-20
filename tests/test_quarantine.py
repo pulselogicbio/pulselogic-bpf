@@ -26,6 +26,7 @@ def test_run_pipeline_writes_quarantine_on_invalid_config(tmp_path):
             "manifest_json": "demo_run_manifest.json",
             "executive_summary_txt": "EXECUTIVE_SUMMARY.txt",
             "quarantine_json": "QUARANTINE.json",
+            "run_fingerprint_json": "RUN_FINGERPRINT.json",
         },
     }
 

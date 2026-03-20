@@ -11,6 +11,7 @@ def main() -> None:
     print(f"Wrote checkpoint log to: {result['checkpoint_output_path']}")
     print(f"Wrote run manifest to: {result['manifest_output_path']}")
     print(f"Wrote executive summary to: {result['executive_summary_path']}")
+    print(f"Wrote run fingerprint to: {result['fingerprint_output_path']}")
     print(f"Top features used: {result['top_features']}")
 
 
