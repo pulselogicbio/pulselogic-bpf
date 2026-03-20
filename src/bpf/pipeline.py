@@ -1,5 +1,3 @@
-from bpf.validation.bootstrap import build_bootstrap_summary
-
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -11,6 +9,7 @@ from bpf.io.manifests import validate_run_config
 from bpf.io.hashing import sha256_file, build_run_fingerprint
 from bpf.ranking.auc_ranker import compute_feature_auc_table
 from bpf.fusion.scorer import compute_fused_scores
+from bpf.validation.bootstrap import build_bootstrap_summary
 from bpf.compliance.audit import build_run_audit
 from bpf.compliance.checkpoint import build_checkpoint_log
 from bpf.compliance.quarantine import write_quarantine_record
@@ -63,6 +62,21 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
         )
         fused_df.to_csv(fused_output_path, index=False)
 
+        bootstrap_summary = None
+        if bool(config["analysis"]["bootstrap_enabled"]):
+            ci_percentiles = tuple(config["analysis"]["bootstrap_ci_percentiles"])
+            bootstrap_summary = build_bootstrap_summary(
+                expression_df,
+                auc_df,
+                top_features=top_features,
+                iterations=int(config["analysis"]["bootstrap_iterations"]),
+                ci_percentiles=ci_percentiles,
+                use_direction_aware_fusion=bool(config["analysis"]["use_direction_aware_fusion"]),
+                use_auc_weights=bool(config["analysis"]["use_auc_weights"]),
+                random_seed=int(config["random_seed"]),
+            )
+            write_json(bootstrap_summary, bootstrap_summary_path)
+
         audit = build_run_audit(
             config_path=config_path,
             expression_path=expression_path,
@@ -95,6 +109,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
                 "fused_scores": sha256_file(fused_output_path),
                 "audit_json": sha256_file(audit_output_path),
                 "checkpoint_json": sha256_file(checkpoint_output_path),
+                "bootstrap_summary_json": sha256_file(bootstrap_summary_path) if bootstrap_summary is not None else None,
             },
             "selected_top_features": top_features,
         }
@@ -126,6 +141,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
                 "executive_summary_txt": str(executive_summary_path),
                 "quarantine_json": str(quarantine_output_path),
                 "run_fingerprint_json": str(fingerprint_output_path),
+                "bootstrap_summary_json": str(bootstrap_summary_path),
             },
         }
         write_json(manifest, manifest_output_path)
