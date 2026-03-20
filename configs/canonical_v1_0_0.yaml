@@ -8,6 +8,8 @@ inputs:
 
 analysis:
   top_n_features: 3
+  use_direction_aware_fusion: true
+  use_auc_weights: true
 
 outputs:
   base_dir: outputs

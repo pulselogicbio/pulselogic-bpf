@@ -51,7 +51,13 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
         auc_df.to_csv(auc_output_path, index=False)
 
         top_features = auc_df["feature"].head(top_n_features).tolist()
-        fused_df = compute_fused_scores(expression_df, top_features=top_features)
+        fused_df = compute_fused_scores(
+            expression_df,
+            auc_df,
+            top_features=top_features,
+            use_direction_aware_fusion=bool(config["analysis"]["use_direction_aware_fusion"]),
+            use_auc_weights=bool(config["analysis"]["use_auc_weights"]),
+        )
         fused_df.to_csv(fused_output_path, index=False)
 
         audit = build_run_audit(

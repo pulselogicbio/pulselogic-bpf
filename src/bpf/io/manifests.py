@@ -12,10 +12,11 @@ def validate_run_config(config: dict[str, Any]) -> None:
         if key not in config["inputs"]:
             raise ValueError(f"Missing required input config key: inputs.{key}")
 
-    required_analysis_keys = ["top_n_features"]
-    for key in required_analysis_keys:
-        if key not in config["analysis"]:
-            raise ValueError(f"Missing required analysis config key: analysis.{key}")
+    required_analysis_keys = [
+    "top_n_features",
+    "use_direction_aware_fusion",
+    "use_auc_weights",
+]
 
     required_output_keys = [
     "base_dir",

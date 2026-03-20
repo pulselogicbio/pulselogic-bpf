@@ -14,6 +14,8 @@ def test_validate_run_config_accepts_valid_config():
         },
         "analysis": {
             "top_n_features": 3,
+            "use_direction_aware_fusion": True,
+            "use_auc_weights": True,
         },
         "outputs": {
             "base_dir": "outputs",
@@ -23,6 +25,8 @@ def test_validate_run_config_accepts_valid_config():
             "checkpoint_json": "demo_checkpoint_log.json",
             "manifest_json": "demo_run_manifest.json",
             "executive_summary_txt": "EXECUTIVE_SUMMARY.txt",
+            "quarantine_json": "QUARANTINE.json",
+            "run_fingerprint_json": "RUN_FINGERPRINT.json",
         },
     }
 
