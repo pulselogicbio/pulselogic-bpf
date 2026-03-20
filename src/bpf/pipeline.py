@@ -9,7 +9,10 @@ from bpf.io.manifests import validate_run_config
 from bpf.io.hashing import sha256_file, build_run_fingerprint
 from bpf.ranking.auc_ranker import compute_feature_auc_table
 from bpf.fusion.scorer import compute_fused_scores
-from bpf.validation.bootstrap import build_bootstrap_summary
+from bpf.validation.bootstrap import (
+    build_bootstrap_summary,
+    build_feature_stability_summary,
+)
 from bpf.compliance.audit import build_run_audit
 from bpf.compliance.checkpoint import build_checkpoint_log
 from bpf.compliance.quarantine import write_quarantine_record
@@ -38,6 +41,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
         quarantine_output_path = output_dir / config["outputs"]["quarantine_json"]
         fingerprint_output_path = output_dir / config["outputs"]["run_fingerprint_json"]
         bootstrap_summary_path = output_dir / config["outputs"]["bootstrap_summary_json"]
+        feature_stability_path = output_dir / config["outputs"]["feature_stability_json"]
         auc_output_path = output_dir / config["outputs"]["auc_table"]
         fused_output_path = output_dir / config["outputs"]["fused_scores"]
         audit_output_path = output_dir / config["outputs"]["audit_json"]
@@ -63,8 +67,11 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
         fused_df.to_csv(fused_output_path, index=False)
 
         bootstrap_summary = None
+        feature_stability_summary = None
+
         if bool(config["analysis"]["bootstrap_enabled"]):
             ci_percentiles = tuple(config["analysis"]["bootstrap_ci_percentiles"])
+
             bootstrap_summary = build_bootstrap_summary(
                 expression_df,
                 auc_df,
@@ -76,6 +83,17 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
                 random_seed=int(config["random_seed"]),
             )
             write_json(bootstrap_summary, bootstrap_summary_path)
+
+            feature_stability_summary = build_feature_stability_summary(
+                expression_df,
+                labels_df,
+                iterations=int(config["analysis"]["bootstrap_iterations"]),
+                top_n_features=top_n_features,
+                sample_col="sample_id",
+                label_col="label",
+                random_seed=int(config["random_seed"]),
+            )
+            write_json(feature_stability_summary, feature_stability_path)
 
         audit = build_run_audit(
             config_path=config_path,
@@ -110,6 +128,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
                 "audit_json": sha256_file(audit_output_path),
                 "checkpoint_json": sha256_file(checkpoint_output_path),
                 "bootstrap_summary_json": sha256_file(bootstrap_summary_path) if bootstrap_summary is not None else None,
+                "feature_stability_json": sha256_file(feature_stability_path) if feature_stability_summary is not None else None,
             },
             "selected_top_features": top_features,
         }
@@ -142,6 +161,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
                 "quarantine_json": str(quarantine_output_path),
                 "run_fingerprint_json": str(fingerprint_output_path),
                 "bootstrap_summary_json": str(bootstrap_summary_path),
+                "feature_stability_json": str(feature_stability_path),
             },
         }
         write_json(manifest, manifest_output_path)
@@ -178,6 +198,7 @@ def run_pipeline(config_path: str | Path, invocation_mode: str = "script") -> di
             "quarantine_output_path": quarantine_output_path,
             "fingerprint_output_path": fingerprint_output_path,
             "bootstrap_summary_path": bootstrap_summary_path,
+            "feature_stability_path": feature_stability_path,
             "top_features": top_features,
         }
 
