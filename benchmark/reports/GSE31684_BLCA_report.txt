@@ -1,0 +1,50 @@
+========================================================================
+  BPF BENCHMARK REPORT: GSE31684_BLCA
+  Generated: 2026-03-10 12:59:21
+========================================================================
+
+  COHORT CHARACTERISTICS
+  Samples:                 66
+  Genes (post-filter):     10000
+  Events:                  38 (57.6%)
+  Non-events:              28 (42.4%)
+  Class balance:           BALANCED
+
+  EVALUATION DESIGN
+  Outer CV:                5x5 repeated stratified k-fold
+  Inner CV:                3-fold (LASSO/ElasticNet tuning)
+  Seed:                    42
+  Classifier:              RandomForest(n=100, depth=6)
+  C grid:                  [0.01, 0.1, 1.0, 5.0]
+  L1 ratio grid:           [0.1, 0.5, 0.9]
+
+  RESULTS
+  Method                            AUC   +/-Std   CI Low    CI Hi     Stab       Time
+  --------------------------------------------------------------------------------
+  BPF (RF-fixed)                 0.4586   0.1620   0.3964   0.5261    0.143       7.1m
+  LASSO (RF-fixed)               0.4654   0.2059   0.3846   0.5485    0.222      58.3m
+  ElasticNet (RF-fixed)          0.4393   0.2037   0.3607   0.5186    0.131       2.6h
+  RF_Importance (RF-fixed)       0.4626   0.2048   0.3842   0.5418    0.015      16.0s
+  RF (native)                    0.4110   0.1320   0.3610   0.4598      N/A       7.0s
+
+  BPF vs BASELINES
+  Comparison                              d_AUC       Result
+  ----------------------------------------------------------
+  BPF vs LASSO (RF-fixed)               -0.0068  TIE (~0.02)
+  BPF vs ElasticNet (RF-fixed)          +0.0193  TIE (~0.02)
+  BPF vs RF_Importance (RF-fixed)       -0.0040  TIE (~0.02)
+  BPF vs RF (native)                    +0.0476     BPF WINS
+
+  RUNTIME COMPARISON
+  BPF vs LASSO (RF-fixed): 8.2x faster
+  BPF vs ElasticNet (RF-fixed): 21.5x faster
+  BPF vs RF_Importance (RF-fixed): 0.0x faster
+  BPF vs RF (native): 0.0x faster
+
+  ASSESSMENT
+  [!] STRESS COHORT: All methods near chance (BPF AUC=0.4586)
+     Likely cause: scarce minority class (28 non-events)
+
+========================================================================
+  PulseLogic Biosciences | BPF Benchmark v2.3
+========================================================================

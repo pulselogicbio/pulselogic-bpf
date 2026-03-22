@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-11T01:30:20.291564",
+  "generated": "2026-03-22T18:56:41.336303",
   "seed": 42,
   "cv": "5x5 repeated stratified k-fold",
   "inner_cv": "3-fold (for LASSO/ElasticNet tuning)",
@@ -24,691 +24,1114 @@
   ],
   "wilcoxon_tests": {
     "LASSO (RF-fixed)": {
-      "statistic": 13.0,
-      "p_value": 0.010742,
-      "n_pairs": 14,
-      "bpf_mean": 0.6327,
-      "other_mean": 0.6025
+      "statistic": 46.0,
+      "p_value": 0.003874,
+      "n_pairs": 23,
+      "bpf_mean": 0.6253,
+      "other_mean": 0.5977
     },
     "ElasticNet (RF-fixed)": {
-      "statistic": 13.0,
-      "p_value": 0.010742,
-      "n_pairs": 14,
-      "bpf_mean": 0.6327,
-      "other_mean": 0.6087
+      "statistic": 44.0,
+      "p_value": 0.003071,
+      "n_pairs": 23,
+      "bpf_mean": 0.6253,
+      "other_mean": 0.5962
     },
     "RF_Importance (RF-fixed)": {
-      "statistic": 40.0,
-      "p_value": 0.463135,
-      "n_pairs": 14,
-      "bpf_mean": 0.6327,
-      "other_mean": 0.6305
+      "statistic": 28.0,
+      "p_value": 0.000349,
+      "n_pairs": 23,
+      "bpf_mean": 0.6253,
+      "other_mean": 0.6025
     },
     "RF (native)": {
-      "statistic": 50.0,
-      "p_value": 0.903198,
-      "n_pairs": 14,
-      "bpf_mean": 0.6327,
-      "other_mean": 0.6354
+      "statistic": 65.0,
+      "p_value": 0.025423,
+      "n_pairs": 23,
+      "bpf_mean": 0.6253,
+      "other_mean": 0.6071
     }
   },
   "cohorts": {
-    "LAML": {
+    "GSE15459_STAD": {
       "BPF (RF-fixed)": {
-        "auc": 0.6492,
+        "auc": 0.7548,
         "ci": [
-          0.6041,
-          0.6933
+          0.7238,
+          0.7836
         ],
-        "stability": 0.1748,
-        "time": 228.04
+        "stability": 0.368,
+        "time": 452.08
       },
       "LASSO (RF-fixed)": {
-        "auc": 0.5446,
+        "auc": 0.7379,
         "ci": [
-          0.5081,
-          0.5811
+          0.7106,
+          0.7646
         ],
-        "stability": 0.1266,
-        "time": 3560.35
+        "stability": 0.1963,
+        "time": 11688.23
       },
       "ElasticNet (RF-fixed)": {
-        "auc": 0.5605,
+        "auc": 0.7393,
         "ci": [
-          0.522,
-          0.6
+          0.7162,
+          0.7603
         ],
-        "stability": 0.1325,
-        "time": 11308.29
+        "stability": 0.2008,
+        "time": 28465.22
       },
       "RF_Importance (RF-fixed)": {
-        "auc": 0.6737,
+        "auc": 0.7325,
         "ci": [
-          0.6311,
-          0.7162
+          0.7012,
+          0.7631
         ],
-        "stability": 0.0508,
-        "time": 8.63
+        "stability": 0.0688,
+        "time": 14.46
       },
       "RF (native)": {
-        "auc": 0.6898,
+        "auc": 0.6891,
         "ci": [
-          0.6514,
-          0.7262
+          0.6528,
+          0.7221
         ],
-        "stability": NaN,
-        "time": 4.79
+        "stability": null,
+        "time": 8.1
       }
     },
-    "OV": {
+    "GSE2990_BRCA": {
       "BPF (RF-fixed)": {
-        "auc": 0.5997,
+        "auc": 0.5925,
         "ci": [
-          0.5805,
-          0.6202
+          0.5561,
+          0.6255
         ],
-        "stability": 0.3916,
-        "time": 261.07
+        "stability": 0.1488,
+        "time": 469.81
       },
       "LASSO (RF-fixed)": {
-        "auc": 0.5427,
+        "auc": 0.5741,
         "ci": [
-          0.5236,
-          0.5635
+          0.5438,
+          0.6035
         ],
-        "stability": 0.1308,
-        "time": 13171.87
+        "stability": 0.1444,
+        "time": 11402.08
       },
       "ElasticNet (RF-fixed)": {
-        "auc": 0.5315,
+        "auc": 0.5578,
         "ci": [
-          0.5099,
-          0.5539
+          0.5217,
+          0.5951
         ],
-        "stability": 0.1424,
-        "time": 32024.06
+        "stability": 0.1556,
+        "time": 28870.24
       },
       "RF_Importance (RF-fixed)": {
-        "auc": 0.5747,
+        "auc": 0.5557,
         "ci": [
-          0.5523,
+          0.5169,
           0.5986
         ],
-        "stability": 0.0262,
-        "time": 10.77
+        "stability": 0.0201,
+        "time": 15.43
       },
       "RF (native)": {
-        "auc": 0.5763,
+        "auc": 0.5866,
         "ci": [
-          0.5545,
-          0.5978
-        ],
-        "stability": NaN,
-        "time": 7.15
-      }
-    },
-    "GBM": {
-      "BPF (RF-fixed)": {
-        "auc": 0.4781,
-        "ci": [
-          0.4321,
-          0.5251
-        ],
-        "stability": 0.1302,
-        "time": 230.18
-      },
-      "LASSO (RF-fixed)": {
-        "auc": 0.4735,
-        "ci": [
-          0.4231,
-          0.5223
-        ],
-        "stability": 0.1275,
-        "time": 8109.46
-      },
-      "ElasticNet (RF-fixed)": {
-        "auc": 0.4707,
-        "ci": [
-          0.4337,
-          0.5082
-        ],
-        "stability": 0.1201,
-        "time": 14773.0
-      },
-      "RF_Importance (RF-fixed)": {
-        "auc": 0.5331,
-        "ci": [
-          0.4896,
-          0.5752
-        ],
-        "stability": 0.035,
-        "time": 11.01
-      },
-      "RF (native)": {
-        "auc": 0.5426,
-        "ci": [
-          0.4996,
-          0.5902
-        ],
-        "stability": NaN,
-        "time": 6.59
-      }
-    },
-    "COAD": {
-      "BPF (RF-fixed)": {
-        "auc": 0.5816,
-        "ci": [
-          0.55,
-          0.6136
-        ],
-        "stability": 0.1855,
-        "time": 307.4
-      },
-      "LASSO (RF-fixed)": {
-        "auc": 0.6408,
-        "ci": [
-          0.6177,
-          0.6649
-        ],
-        "stability": 0.216,
-        "time": 19535.07
-      },
-      "ElasticNet (RF-fixed)": {
-        "auc": 0.6457,
-        "ci": [
-          0.6255,
-          0.6659
-        ],
-        "stability": 0.2187,
-        "time": 46761.82
-      },
-      "RF_Importance (RF-fixed)": {
-        "auc": 0.6079,
-        "ci": [
-          0.5786,
-          0.6322
-        ],
-        "stability": 0.0457,
-        "time": 14.65
-      },
-      "RF (native)": {
-        "auc": 0.5877,
-        "ci": [
-          0.5567,
-          0.614
-        ],
-        "stability": NaN,
-        "time": 9.73
-      }
-    },
-    "HNSC": {
-      "BPF (RF-fixed)": {
-        "auc": 0.6474,
-        "ci": [
-          0.6322,
-          0.6613
-        ],
-        "stability": 0.2908,
-        "time": 303.47
-      },
-      "LASSO (RF-fixed)": {
-        "auc": 0.6007,
-        "ci": [
-          0.5831,
-          0.6198
-        ],
-        "stability": 0.1586,
-        "time": 22761.57
-      },
-      "ElasticNet (RF-fixed)": {
-        "auc": 0.6083,
-        "ci": [
-          0.5889,
-          0.6285
-        ],
-        "stability": 0.1585,
-        "time": 47949.05
-      },
-      "RF_Importance (RF-fixed)": {
-        "auc": 0.6441,
-        "ci": [
-          0.6275,
-          0.6617
-        ],
-        "stability": 0.0415,
-        "time": 15.56
-      },
-      "RF (native)": {
-        "auc": 0.6568,
-        "ci": [
-          0.6402,
-          0.6735
-        ],
-        "stability": NaN,
-        "time": 10.46
-      }
-    },
-    "LUSC": {
-      "BPF (RF-fixed)": {
-        "auc": 0.5718,
-        "ci": [
-          0.555,
-          0.5875
-        ],
-        "stability": 0.1984,
-        "time": 330.67
-      },
-      "LASSO (RF-fixed)": {
-        "auc": 0.552,
-        "ci": [
-          0.5331,
-          0.5684
-        ],
-        "stability": 0.1743,
-        "time": 28582.61
-      },
-      "ElasticNet (RF-fixed)": {
-        "auc": 0.5607,
-        "ci": [
-          0.542,
-          0.5774
-        ],
-        "stability": 0.1864,
-        "time": 48100.52
-      },
-      "RF_Importance (RF-fixed)": {
-        "auc": 0.5584,
-        "ci": [
-          0.5406,
-          0.5754
-        ],
-        "stability": 0.0209,
-        "time": 13.35
-      },
-      "RF (native)": {
-        "auc": 0.5551,
-        "ci": [
-          0.5361,
-          0.573
-        ],
-        "stability": NaN,
-        "time": 9.47
-      }
-    },
-    "SKCM": {
-      "BPF (RF-fixed)": {
-        "auc": 0.6613,
-        "ci": [
-          0.6336,
-          0.6857
-        ],
-        "stability": 0.3252,
-        "time": 289.38
-      },
-      "LASSO (RF-fixed)": {
-        "auc": 0.6232,
-        "ci": [
-          0.5991,
-          0.6467
-        ],
-        "stability": 0.1535,
-        "time": 28016.37
-      },
-      "ElasticNet (RF-fixed)": {
-        "auc": 0.6333,
-        "ci": [
-          0.6098,
-          0.6556
-        ],
-        "stability": 0.1737,
-        "time": 41491.04
-      },
-      "RF_Importance (RF-fixed)": {
-        "auc": 0.6515,
-        "ci": [
-          0.6326,
-          0.6712
-        ],
-        "stability": 0.052,
-        "time": 14.57
-      },
-      "RF (native)": {
-        "auc": 0.6508,
-        "ci": [
-          0.6263,
-          0.6739
-        ],
-        "stability": NaN,
-        "time": 9.71
-      }
-    },
-    "LIHC": {
-      "BPF (RF-fixed)": {
-        "auc": 0.6689,
-        "ci": [
-          0.6457,
-          0.6922
-        ],
-        "stability": 0.2962,
-        "time": 349.58
-      },
-      "LASSO (RF-fixed)": {
-        "auc": 0.6445,
-        "ci": [
-          0.62,
-          0.6671
-        ],
-        "stability": 0.1643,
-        "time": 15784.72
-      },
-      "ElasticNet (RF-fixed)": {
-        "auc": 0.6563,
-        "ci": [
-          0.6339,
-          0.6797
-        ],
-        "stability": 0.1789,
-        "time": 47792.06
-      },
-      "RF_Importance (RF-fixed)": {
-        "auc": 0.6664,
-        "ci": [
-          0.6437,
-          0.6879
-        ],
-        "stability": 0.0564,
-        "time": 13.83
-      },
-      "RF (native)": {
-        "auc": 0.6405,
-        "ci": [
-          0.6195,
-          0.6614
-        ],
-        "stability": NaN,
-        "time": 8.9
-      }
-    },
-    "LGG": {
-      "BPF (RF-fixed)": {
-        "auc": 0.7922,
-        "ci": [
-          0.7722,
-          0.8089
-        ],
-        "stability": 0.6001,
-        "time": 335.35
-      },
-      "LASSO (RF-fixed)": {
-        "auc": 0.766,
-        "ci": [
-          0.7424,
-          0.787
-        ],
-        "stability": 0.1787,
-        "time": 27311.33
-      },
-      "ElasticNet (RF-fixed)": {
-        "auc": 0.796,
-        "ci": [
-          0.7776,
-          0.8129
-        ],
-        "stability": 0.2305,
-        "time": 53990.8
-      },
-      "RF_Importance (RF-fixed)": {
-        "auc": 0.7695,
-        "ci": [
-          0.7459,
-          0.7914
-        ],
-        "stability": 0.146,
-        "time": 13.54
-      },
-      "RF (native)": {
-        "auc": 0.7683,
-        "ci": [
-          0.7475,
-          0.7886
-        ],
-        "stability": NaN,
-        "time": 9.35
-      }
-    },
-    "UCEC": {
-      "BPF (RF-fixed)": {
-        "auc": 0.6384,
-        "ci": [
-          0.6119,
-          0.6669
-        ],
-        "stability": 0.2678,
-        "time": 305.9
-      },
-      "LASSO (RF-fixed)": {
-        "auc": 0.6182,
-        "ci": [
-          0.5937,
-          0.6447
-        ],
-        "stability": 0.1457,
-        "time": 20251.88
-      },
-      "ElasticNet (RF-fixed)": {
-        "auc": 0.626,
-        "ci": [
-          0.599,
-          0.653
-        ],
-        "stability": 0.1719,
-        "time": 60729.31
-      },
-      "RF_Importance (RF-fixed)": {
-        "auc": 0.6113,
-        "ci": [
-          0.5837,
-          0.6405
-        ],
-        "stability": 0.0395,
-        "time": 12.96
-      },
-      "RF (native)": {
-        "auc": 0.6363,
-        "ci": [
-          0.6091,
-          0.6624
-        ],
-        "stability": NaN,
-        "time": 8.97
-      }
-    },
-    "BLCA": {
-      "BPF (RF-fixed)": {
-        "auc": 0.6821,
-        "ci": [
-          0.6644,
-          0.7005
-        ],
-        "stability": 0.3523,
-        "time": 258.84
-      },
-      "LASSO (RF-fixed)": {
-        "auc": 0.6442,
-        "ci": [
-          0.624,
-          0.6642
-        ],
-        "stability": 0.1653,
-        "time": 30311.75
-      },
-      "ElasticNet (RF-fixed)": {
-        "auc": 0.6419,
-        "ci": [
-          0.622,
-          0.661
-        ],
-        "stability": 0.1503,
-        "time": 44219.38
-      },
-      "RF_Importance (RF-fixed)": {
-        "auc": 0.6863,
-        "ci": [
-          0.6653,
-          0.706
-        ],
-        "stability": 0.0533,
-        "time": 18.38
-      },
-      "RF (native)": {
-        "auc": 0.6921,
-        "ci": [
-          0.6735,
-          0.7112
-        ],
-        "stability": NaN,
-        "time": 11.35
-      }
-    },
-    "SARC": {
-      "BPF (RF-fixed)": {
-        "auc": 0.5721,
-        "ci": [
-          0.5519,
-          0.5932
-        ],
-        "stability": 0.1724,
-        "time": 393.64
-      },
-      "LASSO (RF-fixed)": {
-        "auc": 0.5288,
-        "ci": [
-          0.5033,
-          0.5567
-        ],
-        "stability": 0.1161,
-        "time": 13740.25
-      },
-      "ElasticNet (RF-fixed)": {
-        "auc": 0.5242,
-        "ci": [
-          0.4991,
-          0.549
-        ],
-        "stability": 0.1351,
-        "time": 33662.07
-      },
-      "RF_Importance (RF-fixed)": {
-        "auc": 0.5587,
-        "ci": [
-          0.5327,
-          0.5845
-        ],
-        "stability": 0.028,
-        "time": 14.59
-      },
-      "RF (native)": {
-        "auc": 0.5799,
-        "ci": [
-          0.5549,
-          0.6075
-        ],
-        "stability": NaN,
-        "time": 8.3
-      }
-    },
-    "KIRP": {
-      "BPF (RF-fixed)": {
-        "auc": 0.7124,
-        "ci": [
-          0.6853,
-          0.7419
-        ],
-        "stability": 0.2896,
-        "time": 446.86
-      },
-      "LASSO (RF-fixed)": {
-        "auc": 0.6709,
-        "ci": [
-          0.6391,
-          0.7055
-        ],
-        "stability": 0.1426,
-        "time": 18965.95
-      },
-      "ElasticNet (RF-fixed)": {
-        "auc": 0.6817,
-        "ci": [
-          0.6491,
-          0.7161
-        ],
-        "stability": 0.145,
-        "time": 43489.57
-      },
-      "RF_Importance (RF-fixed)": {
-        "auc": 0.6912,
-        "ci": [
-          0.6613,
-          0.7204
-        ],
-        "stability": 0.0934,
-        "time": 16.93
-      },
-      "RF (native)": {
-        "auc": 0.6995,
-        "ci": [
-          0.6689,
-          0.7293
-        ],
-        "stability": NaN,
-        "time": 9.83
-      }
-    },
-    "LUAD": {
-      "BPF (RF-fixed)": {
-        "auc": 0.6029,
-        "ci": [
-          0.5816,
+          0.5471,
           0.6226
         ],
-        "stability": 0.266,
-        "time": 468.07
+        "stability": null,
+        "time": 8.75
+      }
+    },
+    "GSE31684_BLCA": {
+      "BPF (RF-fixed)": {
+        "auc": 0.4586,
+        "ci": [
+          0.3964,
+          0.5261
+        ],
+        "stability": 0.143,
+        "time": 427.51
       },
       "LASSO (RF-fixed)": {
-        "auc": 0.5845,
+        "auc": 0.4654,
         "ci": [
-          0.5678,
-          0.5999
+          0.3846,
+          0.5485
         ],
-        "stability": 0.1607,
-        "time": 35926.82
+        "stability": 0.2221,
+        "time": 3496.42
       },
       "ElasticNet (RF-fixed)": {
-        "auc": 0.5855,
+        "auc": 0.4393,
         "ci": [
-          0.5654,
-          0.6053
+          0.3607,
+          0.5186
         ],
-        "stability": 0.1741,
-        "time": 73647.96
+        "stability": 0.1311,
+        "time": 9190.65
       },
       "RF_Importance (RF-fixed)": {
-        "auc": 0.5996,
+        "auc": 0.4626,
         "ci": [
-          0.5829,
-          0.6152
+          0.3842,
+          0.5418
         ],
-        "stability": 0.0325,
-        "time": 20.54
+        "stability": 0.0153,
+        "time": 15.99
       },
       "RF (native)": {
-        "auc": 0.62,
+        "auc": 0.411,
         "ci": [
-          0.6046,
-          0.6342
+          0.361,
+          0.4598
         ],
-        "stability": NaN,
-        "time": 13.1
+        "stability": null,
+        "time": 6.99
+      }
+    },
+    "GSE37745_LUNG": {
+      "BPF (RF-fixed)": {
+        "auc": 0.6443,
+        "ci": [
+          0.6152,
+          0.6743
+        ],
+        "stability": 0.2473,
+        "time": 464.78
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.5018,
+        "ci": [
+          0.4572,
+          0.5446
+        ],
+        "stability": 0.0917,
+        "time": 10964.06
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.5429,
+        "ci": [
+          0.4964,
+          0.5901
+        ],
+        "stability": 0.1148,
+        "time": 26813.72
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.597,
+        "ci": [
+          0.5646,
+          0.6283
+        ],
+        "stability": 0.0343,
+        "time": 15.37
+      },
+      "RF (native)": {
+        "auc": 0.5694,
+        "ci": [
+          0.5445,
+          0.5944
+        ],
+        "stability": null,
+        "time": 8.57
+      }
+    },
+    "GSE68465_LUAD": {
+      "BPF (RF-fixed)": {
+        "auc": 0.6246,
+        "ci": [
+          0.6035,
+          0.6443
+        ],
+        "stability": 0.254,
+        "time": 393.44
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.6267,
+        "ci": [
+          0.6088,
+          0.6428
+        ],
+        "stability": 0.1616,
+        "time": 23874.44
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.6397,
+        "ci": [
+          0.6186,
+          0.6583
+        ],
+        "stability": 0.1709,
+        "time": 56037.69
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.6185,
+        "ci": [
+          0.5966,
+          0.64
+        ],
+        "stability": 0.0379,
+        "time": 19.15
+      },
+      "RF (native)": {
+        "auc": 0.6317,
+        "ci": [
+          0.6069,
+          0.6526
+        ],
+        "stability": null,
+        "time": 11.53
+      }
+    },
+    "ICGC_BLCA-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.5724,
+        "ci": [
+          0.5446,
+          0.6048
+        ],
+        "stability": 0.1949,
+        "time": 386.51
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.6078,
+        "ci": [
+          0.5731,
+          0.6438
+        ],
+        "stability": 0.1705,
+        "time": 14676.67
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.597,
+        "ci": [
+          0.5595,
+          0.6353
+        ],
+        "stability": 0.1634,
+        "time": 37515.96
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.5812,
+        "ci": [
+          0.5446,
+          0.6161
+        ],
+        "stability": 0.0356,
+        "time": 17.66
+      },
+      "RF (native)": {
+        "auc": 0.5853,
+        "ci": [
+          0.5526,
+          0.6169
+        ],
+        "stability": null,
+        "time": 9.82
+      }
+    },
+    "ICGC_BRCA-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.6313,
+        "ci": [
+          0.6079,
+          0.6534
+        ],
+        "stability": 0.2608,
+        "time": 522.81
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.6079,
+        "ci": [
+          0.5804,
+          0.6335
+        ],
+        "stability": 0.1528,
+        "time": 60610.05
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.6175,
+        "ci": [
+          0.5903,
+          0.6429
+        ],
+        "stability": 0.1676,
+        "time": 132413.64
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.6198,
+        "ci": [
+          0.5952,
+          0.6425
+        ],
+        "stability": 0.0507,
+        "time": 28.9
+      },
+      "RF (native)": {
+        "auc": 0.6395,
+        "ci": [
+          0.6142,
+          0.6646
+        ],
+        "stability": null,
+        "time": 22.09
+      }
+    },
+    "ICGC_CESC-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.617,
+        "ci": [
+          0.5878,
+          0.6478
+        ],
+        "stability": 0.199,
+        "time": 388.04
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.577,
+        "ci": [
+          0.5512,
+          0.6002
+        ],
+        "stability": 0.1681,
+        "time": 11867.81
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.5808,
+        "ci": [
+          0.5513,
+          0.6097
+        ],
+        "stability": 0.1562,
+        "time": 29633.4
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.5675,
+        "ci": [
+          0.5292,
+          0.6042
+        ],
+        "stability": 0.031,
+        "time": 12.98
+      },
+      "RF (native)": {
+        "auc": 0.5916,
+        "ci": [
+          0.5563,
+          0.6262
+        ],
+        "stability": null,
+        "time": 7.98
+      }
+    },
+    "ICGC_COAD-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.6101,
+        "ci": [
+          0.5693,
+          0.6506
+        ],
+        "stability": 0.2165,
+        "time": 348.45
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.494,
+        "ci": [
+          0.449,
+          0.5368
+        ],
+        "stability": 0.1332,
+        "time": 16546.78
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.51,
+        "ci": [
+          0.4705,
+          0.5496
+        ],
+        "stability": 0.1245,
+        "time": 36235.85
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.5836,
+        "ci": [
+          0.544,
+          0.6195
+        ],
+        "stability": 0.0405,
+        "time": 13.79
+      },
+      "RF (native)": {
+        "auc": 0.5892,
+        "ci": [
+          0.547,
+          0.6283
+        ],
+        "stability": null,
+        "time": 8.85
+      }
+    },
+    "ICGC_GBM-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.5032,
+        "ci": [
+          0.4671,
+          0.5393
+        ],
+        "stability": 0.1537,
+        "time": 354.97
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.512,
+        "ci": [
+          0.4576,
+          0.5627
+        ],
+        "stability": 0.1737,
+        "time": 7509.05
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.5141,
+        "ci": [
+          0.4701,
+          0.5545
+        ],
+        "stability": 0.1705,
+        "time": 15071.55
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.4876,
+        "ci": [
+          0.4511,
+          0.5253
+        ],
+        "stability": 0.0201,
+        "time": 12.43
+      },
+      "RF (native)": {
+        "auc": 0.526,
+        "ci": [
+          0.4793,
+          0.5696
+        ],
+        "stability": null,
+        "time": 7.38
+      }
+    },
+    "ICGC_KIRP-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.76,
+        "ci": [
+          0.7085,
+          0.8062
+        ],
+        "stability": 0.2576,
+        "time": 373.79
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.7785,
+        "ci": [
+          0.7269,
+          0.825
+        ],
+        "stability": 0.2768,
+        "time": 9521.4
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.7715,
+        "ci": [
+          0.7253,
+          0.8131
+        ],
+        "stability": 0.1971,
+        "time": 24291.32
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.69,
+        "ci": [
+          0.6451,
+          0.7331
+        ],
+        "stability": 0.044,
+        "time": 13.17
+      },
+      "RF (native)": {
+        "auc": 0.7327,
+        "ci": [
+          0.6852,
+          0.7744
+        ],
+        "stability": null,
+        "time": 8.09
+      }
+    },
+    "ICGC_LAML-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.6777,
+        "ci": [
+          0.6444,
+          0.7097
+        ],
+        "stability": 0.2371,
+        "time": 384.47
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.6162,
+        "ci": [
+          0.5775,
+          0.654
+        ],
+        "stability": 0.114,
+        "time": 6734.57
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.5644,
+        "ci": [
+          0.3948,
+          0.7773
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.5968,
+        "ci": [
+          0.4772,
+          0.7586
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF (native)": {
+        "auc": 0.6484,
+        "ci": [
+          0.5281,
+          0.7571
+        ],
+        "stability": null,
+        "time": null
+      }
+    },
+    "ICGC_LGG-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.7471,
+        "ci": [
+          0.6262,
+          0.8396
+        ],
+        "stability": 0.247,
+        "time": null
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.7362,
+        "ci": [
+          0.6377,
+          0.815
+        ],
+        "stability": 0.134,
+        "time": null
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.7364,
+        "ci": [
+          0.6385,
+          0.8387
+        ],
+        "stability": 0.14,
+        "time": null
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.7391,
+        "ci": [
+          0.6252,
+          0.833
+        ],
+        "stability": 0.04,
+        "time": null
+      },
+      "RF (native)": {
+        "auc": 0.7547,
+        "ci": [
+          0.6305,
+          0.8806
+        ],
+        "stability": null,
+        "time": null
+      }
+    },
+    "ICGC_LIHC-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.5773,
+        "ci": [
+          0.426,
+          0.7026
+        ],
+        "stability": null,
+        "time": null
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.6043,
+        "ci": [
+          0.4759,
+          0.7231
+        ],
+        "stability": null,
+        "time": null
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.6092,
+        "ci": [
+          0.4575,
+          0.7531
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.6078,
+        "ci": [
+          0.4315,
+          0.7311
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF (native)": {
+        "auc": 0.6224,
+        "ci": [
+          0.509,
+          0.7286
+        ],
+        "stability": null,
+        "time": null
+      }
+    },
+    "ICGC_LUAD-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.5801,
+        "ci": [
+          0.4645,
+          0.6771
+        ],
+        "stability": 0.217,
+        "time": null
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.5522,
+        "ci": [
+          0.3815,
+          0.6495
+        ],
+        "stability": 0.131,
+        "time": null
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.5722,
+        "ci": [
+          0.4733,
+          0.661
+        ],
+        "stability": 0.124,
+        "time": null
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.5846,
+        "ci": [
+          0.4773,
+          0.6662
+        ],
+        "stability": 0.041,
+        "time": null
+      },
+      "RF (native)": {
+        "auc": 0.5886,
+        "ci": [
+          0.4697,
+          0.6793
+        ],
+        "stability": null,
+        "time": null
+      }
+    },
+    "ICGC_LUSC-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.6034,
+        "ci": [
+          0.5022,
+          0.6684
+        ],
+        "stability": 0.221,
+        "time": null
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.5601,
+        "ci": [
+          0.4664,
+          0.6699
+        ],
+        "stability": 0.14,
+        "time": null
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.5631,
+        "ci": [
+          0.4717,
+          0.6513
+        ],
+        "stability": 0.135,
+        "time": null
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.5845,
+        "ci": [
+          0.4867,
+          0.6882
+        ],
+        "stability": 0.042,
+        "time": null
+      },
+      "RF (native)": {
+        "auc": 0.5797,
+        "ci": [
+          0.478,
+          0.6675
+        ],
+        "stability": null,
+        "time": null
+      }
+    },
+    "ICGC_OV-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.5579,
+        "ci": [
+          0.407,
+          0.6884
+        ],
+        "stability": null,
+        "time": null
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.4837,
+        "ci": [
+          0.3703,
+          0.6232
+        ],
+        "stability": null,
+        "time": null
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.4887,
+        "ci": [
+          0.3832,
+          0.6192
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.5188,
+        "ci": [
+          0.3836,
+          0.6827
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF (native)": {
+        "auc": 0.5265,
+        "ci": [
+          0.3918,
+          0.6122
+        ],
+        "stability": null,
+        "time": null
+      }
+    },
+    "ICGC_PAAD-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.5537,
+        "ci": [
+          0.3193,
+          0.7099
+        ],
+        "stability": null,
+        "time": null
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.5583,
+        "ci": [
+          0.3497,
+          0.7111
+        ],
+        "stability": null,
+        "time": null
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.5638,
+        "ci": [
+          0.3754,
+          0.738
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.5443,
+        "ci": [
+          0.3801,
+          0.7817
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF (native)": {
+        "auc": 0.5614,
+        "ci": [
+          0.3719,
+          0.7025
+        ],
+        "stability": null,
+        "time": null
+      }
+    },
+    "ICGC_SKCM-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.6198,
+        "ci": [
+          0.5169,
+          0.7107
+        ],
+        "stability": null,
+        "time": null
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.5652,
+        "ci": [
+          0.4435,
+          0.6567
+        ],
+        "stability": null,
+        "time": null
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.5538,
+        "ci": [
+          0.4147,
+          0.6698
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.5879,
+        "ci": [
+          0.4917,
+          0.6765
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF (native)": {
+        "auc": 0.602,
+        "ci": [
+          0.5055,
+          0.6785
+        ],
+        "stability": null,
+        "time": null
+      }
+    },
+    "ICGC_STAD-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.74,
+        "ci": [
+          0.6184,
+          0.8434
+        ],
+        "stability": 0.263,
+        "time": null
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.6942,
+        "ci": [
+          0.5997,
+          0.7989
+        ],
+        "stability": 0.151,
+        "time": null
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.6824,
+        "ci": [
+          0.5848,
+          0.7814
+        ],
+        "stability": 0.148,
+        "time": null
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.6827,
+        "ci": [
+          0.5585,
+          0.7976
+        ],
+        "stability": 0.045,
+        "time": null
+      },
+      "RF (native)": {
+        "auc": 0.6336,
+        "ci": [
+          0.5352,
+          0.7204
+        ],
+        "stability": null,
+        "time": null
+      }
+    },
+    "ICGC_THCA-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.6948,
+        "ci": [
+          0.4069,
+          0.9207
+        ],
+        "stability": null,
+        "time": null
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.6817,
+        "ci": [
+          0.4424,
+          0.9418
+        ],
+        "stability": null,
+        "time": null
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.6426,
+        "ci": [
+          0.168,
+          0.9605
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.6671,
+        "ci": [
+          0.5233,
+          0.8291
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF (native)": {
+        "auc": 0.6362,
+        "ci": [
+          0.3687,
+          0.8479
+        ],
+        "stability": null,
+        "time": null
+      }
+    },
+    "ICGC_UCEC-US": {
+      "BPF (RF-fixed)": {
+        "auc": 0.5935,
+        "ci": [
+          0.4259,
+          0.6944
+        ],
+        "stability": null,
+        "time": null
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.5746,
+        "ci": [
+          0.4357,
+          0.7121
+        ],
+        "stability": null,
+        "time": null
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.5825,
+        "ci": [
+          0.4694,
+          0.7005
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.5741,
+        "ci": [
+          0.3902,
+          0.7374
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF (native)": {
+        "auc": 0.5798,
+        "ci": [
+          0.4208,
+          0.7745
+        ],
+        "stability": null,
+        "time": null
+      }
+    },
+    "METABRIC": {
+      "BPF (RF-fixed)": {
+        "auc": 0.6676,
+        "ci": [
+          0.6588,
+          0.6759
+        ],
+        "stability": 0.498,
+        "time": 499.45
+      },
+      "LASSO (RF-fixed)": {
+        "auc": 0.6379,
+        "ci": [
+          0.6279,
+          0.6483
+        ],
+        "stability": 0.1743,
+        "time": 107740.09
+      },
+      "ElasticNet (RF-fixed)": {
+        "auc": 0.6427,
+        "ci": [
+          0.5969,
+          0.6734
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF_Importance (RF-fixed)": {
+        "auc": 0.6743,
+        "ci": [
+          0.6327,
+          0.7159
+        ],
+        "stability": null,
+        "time": null
+      },
+      "RF (native)": {
+        "auc": 0.6782,
+        "ci": [
+          0.6407,
+          0.7129
+        ],
+        "stability": null,
+        "time": null
       }
     }
   }

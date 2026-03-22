@@ -1,0 +1,49 @@
+========================================================================
+  BPF BENCHMARK REPORT: GSE2990_BRCA
+  Generated: 2026-03-11 00:18:48
+========================================================================
+
+  COHORT CHARACTERISTICS
+  Samples:                 179
+  Genes (post-filter):     10000
+  Events:                  40 (22.3%)
+  Non-events:              139 (77.7%)
+  Class balance:           EXTREME
+
+  EVALUATION DESIGN
+  Outer CV:                5x5 repeated stratified k-fold
+  Inner CV:                3-fold (LASSO/ElasticNet tuning)
+  Seed:                    42
+  Classifier:              RandomForest(n=100, depth=6)
+  C grid:                  [0.01, 0.1, 1.0, 5.0]
+  L1 ratio grid:           [0.1, 0.5, 0.9]
+
+  RESULTS
+  Method                            AUC   +/-Std   CI Low    CI Hi     Stab       Time
+  --------------------------------------------------------------------------------
+  BPF (RF-fixed)                 0.5925   0.0883   0.5561   0.6255    0.149       7.8m
+  LASSO (RF-fixed)               0.5741   0.0760   0.5438   0.6035    0.144       3.2h
+  ElasticNet (RF-fixed)          0.5578   0.0935   0.5217   0.5951    0.156       8.0h
+  RF_Importance (RF-fixed)       0.5557   0.1037   0.5169   0.5986    0.020      15.4s
+  RF (native)                    0.5866   0.0967   0.5471   0.6226      N/A       8.8s
+
+  BPF vs BASELINES
+  Comparison                              d_AUC       Result
+  ----------------------------------------------------------
+  BPF vs LASSO (RF-fixed)               +0.0184  TIE (~0.02)
+  BPF vs ElasticNet (RF-fixed)          +0.0347     BPF WINS
+  BPF vs RF_Importance (RF-fixed)       +0.0368     BPF WINS
+  BPF vs RF (native)                    +0.0059  TIE (~0.02)
+
+  RUNTIME COMPARISON
+  BPF vs LASSO (RF-fixed): 24.3x faster
+  BPF vs ElasticNet (RF-fixed): 61.5x faster
+  BPF vs RF_Importance (RF-fixed): 0.0x faster
+  BPF vs RF (native): 0.0x faster
+
+  ASSESSMENT
+  ~  MODERATE: BPF AUC=0.5925 shows detectable signal
+
+========================================================================
+  PulseLogic Biosciences | BPF Benchmark v2.3
+========================================================================

@@ -24,7 +24,6 @@ This repository contains the code and benchmark artifacts for:
 
 ```
 pulselogic-bpf/
-  src/bpf/                  ← Installable BPF Python package
   benchmark/
     bpf_benchmark_v2_3.py   ← Benchmark runner script (manuscript v2.3)
     splits/                 ← Frozen CV split files (23 cohorts, seed=42)
@@ -32,10 +31,8 @@ pulselogic-bpf/
     results/                ← Pre-computed outputs (Tables 1–4 source data)
     reports/                ← Per-cohort benchmark report files
     REPRODUCIBILITY.md      ← Maps every manuscript number to a file
-  configs/                  ← Pipeline configuration files
-  examples/                 ← Runnable demo scripts
-  tests/                    ← Unit tests
-  outputs/                  ← Demo output artifacts
+  LICENSE
+  README.md
   requirements.txt
   pyproject.toml
 ```
@@ -85,7 +82,6 @@ Frozen cross-validation splits (seed=42, 5×5 repeated stratified k-fold) are in
 ```bash
 # Install dependencies
 pip install -r requirements.txt
-pip install -e .
 
 # Single cohort, all methods
 python benchmark/bpf_benchmark_v2_3.py \
@@ -133,33 +129,6 @@ numpy==1.24.0
 pandas==2.0.0
 scipy>=1.12
 ```
-
----
-
-## BPF pipeline (public prototype)
-
-This repository also includes an installable Python package demonstrating the core BPF pipeline architecture:
-
-- Univariate feature ranking by ROC AUC
-- Adaptive top-feature selection
-- Deterministic configuration defaults
-- Audit and checkpoint artifact generation
-- Unit tests for ranking, fusion, determinism, and compliance utilities
-
-### Install
-
-```bash
-pip install -r requirements.txt
-pip install -e .
-```
-
-### Demo
-
-```bash
-python examples/run_demo.py
-```
-
-Demo outputs are written to `outputs/`.
 
 ---
 

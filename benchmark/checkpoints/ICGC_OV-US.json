@@ -1,0 +1,88 @@
+{
+  "cohort": "ICGC_OV-US",
+  "results": {
+    "BPF (RF-fixed)": {
+      "auc_mean": 0.5579,
+      "auc_std": 0.0745,
+      "ci_lo": 0.407,
+      "ci_hi": 0.6884,
+      "stability": null,
+      "time_s": null,
+      "n_ok": 25,
+      "n_err": 0,
+      "folds": []
+    },
+    "LASSO (RF-fixed)": {
+      "auc_mean": 0.4837,
+      "auc_std": 0.0686,
+      "ci_lo": 0.3703,
+      "ci_hi": 0.6232,
+      "stability": null,
+      "time_s": null,
+      "n_ok": 25,
+      "n_err": 0,
+      "folds": []
+    },
+    "ElasticNet (RF-fixed)": {
+      "auc_mean": 0.4887,
+      "auc_std": 0.0586,
+      "ci_lo": 0.3832,
+      "ci_hi": 0.6192,
+      "stability": null,
+      "time_s": null,
+      "n_ok": 25,
+      "n_err": 0,
+      "folds": []
+    },
+    "RF_Importance (RF-fixed)": {
+      "auc_mean": 0.5188,
+      "auc_std": 0.084,
+      "ci_lo": 0.3836,
+      "ci_hi": 0.6827,
+      "stability": null,
+      "time_s": null,
+      "n_ok": 25,
+      "n_err": 0,
+      "folds": []
+    },
+    "RF (native)": {
+      "auc_mean": 0.5265,
+      "auc_std": 0.0627,
+      "ci_lo": 0.3918,
+      "ci_hi": 0.6122,
+      "stability": null,
+      "time_s": null,
+      "n_ok": 25,
+      "n_err": 0,
+      "folds": [
+        0.5106060606060606,
+        0.5045454545454545,
+        0.4707646176911544,
+        0.6026986506746626,
+        0.52023988005997,
+        0.37727272727272726,
+        0.5757575757575758,
+        0.6071964017991005,
+        0.5997001499250375,
+        0.4947526236881559,
+        0.6196969696969697,
+        0.4015151515151515,
+        0.49775112443778113,
+        0.583208395802099,
+        0.568215892053973,
+        0.4606060606060606,
+        0.5954545454545455,
+        0.5457271364317842,
+        0.5427286356821589,
+        0.46926536731634183,
+        0.5484848484848485,
+        0.5833333333333334,
+        0.49175412293853077,
+        0.52023988005997,
+        0.4707646176911544
+      ]
+    }
+  },
+  "note": "Reconstructed from ICGC_OV-US_report.txt. Summary statistics match manuscript Table 1 exactly. RF (native) fold_aucs are original; fold-level data for other methods not recovered from this checkpoint version.",
+  "source": "ICGC_OV-US_report.txt + partial ICGC_OV-US.json"
+}
