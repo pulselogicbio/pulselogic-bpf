@@ -137,7 +137,7 @@ scipy>=1.12
 This repository is public-safe by design and does **not** include:
 
 - Raw expression matrices (publicly available at sources above)
-- Proprietary WRF methodology internals
+- Proprietary methodology internals
 - Disease-specific commercial biomarker panels
 - Internal research assets or private validation corpora
 
