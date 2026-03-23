@@ -108,15 +108,17 @@ The `--resume` flag loads completed cohorts from checkpoints and skips them, ena
 
 ## Data sources
 
-All expression datasets are publicly available. Raw data are not redistributed in this repository.
+All expression datasets are publicly available through the UCSC Xena Browser. Raw data are not redistributed in this repository.
 
 | Tier | Cohorts | Source |
 |---|---|---|
-| METABRIC | 1 cohort, n=1,979 | [EGA: EGAS00000000083](https://ega-archive.org/studies/EGAS00000000083) |
-| GEO | 5 cohorts | [NCBI GEO](https://www.ncbi.nlm.nih.gov/geo/) — accessions GSE68465, GSE15459, GSE37745, GSE31684, GSE2990 |
-| ICGC | 17 cohorts | [ICGC Data Portal](https://dcc.icgc.org/) |
+| METABRIC | 1 cohort, n=1,979 | [UCSC Xena Browser](https://xenabrowser.net/datapages/) — METABRIC dataset |
+| GEO | 5 cohorts | [UCSC Xena Browser](https://xenabrowser.net/datapages/) — accessions GSE68465, GSE15459, GSE37745, GSE31684, GSE2990 |
+| ICGC | 17 cohorts | [UCSC Xena Browser](https://xenabrowser.net/datapages/) — ICGC cohorts |
 
-To reproduce results: download expression matrices from the sources above, align sample identifiers to the frozen split indices in `benchmark/splits/`, and run the benchmark script.
+All datasets were downloaded from the UCSC Xena Browser (https://xenabrowser.net/datapages/). Goldman et al. (2020). Visualizing and interpreting cancer genomics data at the UCSC Xena platform. *Nature Biotechnology*, 38, 675–678. https://doi.org/10.1038/s41587-020-0546-8
+
+To reproduce results: download expression matrices from the UCSC Xena Browser using the cohort accessions above, align sample identifiers to the frozen split indices in `benchmark/splits/`, and run the benchmark script.
 
 ---
 
@@ -137,7 +139,7 @@ scipy>=1.12
 This repository is public-safe by design and does **not** include:
 
 - Raw expression matrices (publicly available at sources above)
-- Proprietary WRF methodology internals
+- Proprietary methodology internals
 - Disease-specific commercial biomarker panels
 - Internal research assets or private validation corpora
 
@@ -172,6 +174,8 @@ ORCiD: [0009-0008-5690-3723](https://orcid.org/0009-0008-5690-3723)
 ## License
 
 MIT License. See [LICENSE](LICENSE) for details.
+
+---
 
 ## Design principles
 
