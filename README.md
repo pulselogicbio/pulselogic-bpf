@@ -5,6 +5,7 @@ Canonical public repository for the Biomarker Probability Fusion (BPF) pipeline,
 [![Python](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![ORCiD](https://img.shields.io/badge/ORCiD-0009--0008--5690--3723-brightgreen.svg)](https://orcid.org/0009-0008-5690-3723)
+[![Patent](https://img.shields.io/badge/Patent-US%2063%2F942%2C422-blue.svg)](https://patents.google.com/)
 
 ---
 
