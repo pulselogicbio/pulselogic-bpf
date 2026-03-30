@@ -1,187 +1,210 @@
-# PulseLogic BPF
+# Biomarker Probability Fusion (BPF)
 
-Canonical public repository for the Biomarker Probability Fusion (BPF) pipeline, reproducibility framework, and benchmark artifacts.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![License](https://img.shields.io/badge/License-See%20LICENSE-blue.svg)](LICENSE)
 
-[![Python](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![ORCiD](https://img.shields.io/badge/ORCiD-0009--0008--5690--3723-brightgreen.svg)](https://orcid.org/0009-0008-5690-3723)
-[![Patent](https://img.shields.io/badge/Patent-US%2063%2F942%2C422-blue.svg)](https://patents.google.com/)
+**A disease-agnostic biomarker discovery and risk stratification framework for precision medicine.**
 
----
-
-## Manuscript
-
-This repository contains the code and benchmark artifacts for:
-
-> Dowden, C.B. (2026). "A stability-governed, tuning-free framework for feature selection
-> in high-dimensional transcriptomic biomarker discovery."
-> *Bioinformatics* (submitted). bioRxiv: [DOI upon posting]
-
-**If you are a reviewer or reader looking to verify manuscript results, go directly to [`benchmark/REPRODUCIBILITY.md`](benchmark/REPRODUCIBILITY.md).**
+Developed by [PulseLogic Biosciences Inc.](https://pulselogic.bio) under the discipline of Computational Bio-AI Engineering (CBAE).
 
 ---
 
-## Repository structure
+## Overview
+
+Biomarker Probability Fusion (BPF) is a deterministic, auditable pipeline for multi-modal biomarker fusion and patient risk stratification. BPF performs:
+
+1. **Univariate biomarker ranking** — AUC-based discriminative power assessment with direction tracking for each gene/feature
+2. **Adaptive gene selection** — Statistical filtering (AUC threshold + p-value) with configurable panel size
+3. **Weighted score fusion** — AUC-weighted z-score composition with direction correction
+4. **Risk stratification** — Probabilistic patient scoring with bootstrap confidence intervals
+5. **Cross-validation** — 5×5 repeated stratified k-fold with complete within-fold feature selection (no information leakage)
+
+BPF is disease-agnostic: the same algorithm and parameters have been validated across oncology, Alzheimer's disease, and Parkinson's disease without domain-specific modifications.
+
+## Validation Summary
+
+| Domain | Training | External Datasets | External Patients | External AUC |
+|--------|----------|-------------------|-------------------|--------------|
+| Oncology | TCGA (39 cohorts) | 41 | 14,498 | 0.8029 |
+| Alzheimer's Disease | ADNI | 7 | 2,892 | ~0.81 |
+| Parkinson's Disease | PPMI | 8 | 753 | 0.793 |
+| **Total** | | **56** | **18,143** | |
+
+56 independent external datasets. 18,143 patients. Three disease domains. 100% statistically significant.
+
+## Repository Structure
 
 ```
-pulselogic-bpf/
-  benchmark/
-    bpf_benchmark_v2_3.py   ← Benchmark runner script (manuscript v2.3)
-    splits/                 ← Frozen CV split files (23 cohorts, seed=42)
-    checkpoints/            ← Per-cohort fold-level result checkpoints
-    results/                ← Pre-computed outputs (Tables 1–4 source data)
-    reports/                ← Per-cohort benchmark report files
-    REPRODUCIBILITY.md      ← Maps every manuscript number to a file
-  LICENSE
-  README.md
-  requirements.txt
-  pyproject.toml
+bpf-pipeline/
+├── README.md
+├── LICENSE
+├── CITATION.cff
+├── requirements.txt
+├── setup.py
+│
+├── bpf/                          # Core BPF pipeline
+│   ├── __init__.py
+│   ├── pipeline.py               # BPF v1.0.0 locked canonical pipeline
+│   ├── pipeline_v2.py            # BPF v2.0 (full dataset, no CV)
+│   ├── ranking.py                # Univariate AUC ranking with direction tracking
+│   ├── selection.py              # Adaptive gene selection
+│   ├── fusion.py                 # AUC-weighted z-score fusion
+│   ├── evaluation.py             # Bootstrap CI, risk stratification
+│   └── utils.py                  # Preprocessing, I/O, gene mapping
+│
+├── scripts/                      # Execution scripts
+│   ├── run_single_cohort.py      # Process a single dataset
+│   ├── run_batch.py              # Batch processing across multiple datasets
+│   └── run_cross_validation.py   # 5×5 repeated stratified k-fold
+│
+├── configs/                      # Parameter configurations
+│   ├── default_params.yaml       # Default BPF parameters
+│   ├── oncology_params.yaml      # Phase 1 oncology configuration
+│   ├── alzheimer_params.yaml     # Phase 2 AD configuration
+│   └── parkinson_params.yaml     # Phase 3 PD configuration
+│
+├── data/                         # Sample data for testing
+│   └── sample_expression.csv     # Small synthetic dataset for CI/CD
+│
+├── tests/                        # Unit and integration tests
+│   ├── test_ranking.py
+│   ├── test_selection.py
+│   ├── test_fusion.py
+│   ├── test_pipeline.py
+│   └── test_reproducibility.py   # Determinism verification (seed=42)
+│
+├── results/                      # Output directory (gitignored except examples)
+│   └── example_output/
+│       ├── DATA.json
+│       ├── DETAILED_STATS.txt
+│       ├── EXECUTIVE_SUMMARY.txt
+│       ├── FULL_AUC_RANKING.txt
+│       ├── GENE_PANEL.txt
+│       └── SAMPLES.txt
+│
+└── docs/
+    ├── METHODS.md                # Detailed methodology documentation
+    ├── PARAMETERS.md             # Parameter reference
+    ├── OUTPUT_FORMAT.md          # Output file specifications
+    └── VALIDATION.md             # External validation summary
 ```
 
----
-
-## Manuscript benchmark results
-
-All numerical results in the manuscript are pre-computed and available in `benchmark/results/`:
-
-| File | Manuscript table |
-|---|---|
-| `benchmark_results.csv` | Table 1 — Per-cohort mean AUC (23 cohorts) |
-| `benchmark_summary.csv` | Table 3 — Cross-tier aggregate AUC |
-| `benchmark_comparisons.csv` | W/L/T comparison summary |
-| `benchmark_long.csv` | Full fold-level AUC data |
-| `benchmark_figure_data.json` | Figure 1–3 source data |
-
-Frozen cross-validation splits (seed=42, 5×5 repeated stratified k-fold) are in `benchmark/splits/`, one JSON file per cohort.
-
----
-
-## Benchmark design
-
-| Parameter | Value |
-|---|---|
-| CV design | 5×5 repeated stratified k-fold (25 folds per cohort) |
-| Random seed | 42 (globally fixed; splits frozen before any method runs) |
-| Downstream classifier | RandomForest(n_estimators=100, max_depth=6, random_state=42) |
-| Gene pre-filter | Top 10,000 by variance (per training fold) |
-| Methods compared | BPF, LASSO, ElasticNet, RF_Importance, RF_native |
-| Primary metric | Mean AUC across 25 held-out test folds |
-| Stability metric | Mean Jaccard similarity across all C(25,2) fold pairs |
-| Cohorts | 23 independent cohorts across METABRIC, GEO, and ICGC |
-| Total patients | 19,038 |
-| Cancer types | 19 |
-
----
-
-## Running the benchmark
-
-> ⚠️ Full re-run is computationally intensive.
-> LASSO and ElasticNet require 6–37 hours per cohort.
-> BPF requires 5–9 minutes per cohort.
-> Pre-computed results in `benchmark/results/` match the manuscript exactly.
+## Installation
 
 ```bash
-# Install dependencies
+git clone https://github.com/pulselogicbio/bpf-pipeline.git
+cd bpf-pipeline
 pip install -r requirements.txt
-
-# Single cohort, all methods
-python benchmark/bpf_benchmark_v2_3.py \
-  --data-dir /path/to/expression/data \
-  --cohorts METABRIC \
-  --skip-mrmr \
-  --max-input-genes 10000
-
-# All cohorts with resume support (recommended for full run)
-python benchmark/bpf_benchmark_v2_3.py \
-  --data-dir /path/to/expression/data \
-  --cohorts METABRIC GSE68465 GSE15459 GSE37745 GSE31684 GSE2990 \
-            BLCA-US BRCA-US CESC-US COAD-US GBM-US KIRP-US LAML-US \
-            LGG-US LIHC-US LUAD-US LUSC-US OV-US PAAD-US SKCM-US \
-            STAD-US THCA-US UCEC-US \
-  --skip-mrmr \
-  --max-input-genes 10000 \
-  --resume
 ```
 
-The `--resume` flag loads completed cohorts from checkpoints and skips them, enabling safe restart after interruption.
+### Requirements
 
----
+- Python ≥ 3.9
+- NumPy ≥ 1.21
+- Pandas ≥ 1.3
+- Scikit-learn ≥ 1.0
+- SciPy ≥ 1.7
+- XGBoost ≥ 1.5 (optional, for ML-optimized weights)
 
-## Data sources
+## Quick Start
 
-All expression datasets are publicly available through the UCSC Xena Browser. Raw data are not redistributed in this repository.
+```python
+from bpf import BPFPipeline
 
-| Tier | Cohorts | Source |
-|---|---|---|
-| METABRIC | 1 cohort, n=1,979 | [UCSC Xena Browser](https://xenabrowser.net/datapages/) — METABRIC dataset |
-| GEO | 5 cohorts | [UCSC Xena Browser](https://xenabrowser.net/datapages/) — accessions GSE68465, GSE15459, GSE37745, GSE31684, GSE2990 |
-| ICGC | 17 cohorts | [UCSC Xena Browser](https://xenabrowser.net/datapages/) — ICGC cohorts |
+# Initialize with default parameters
+pipeline = BPFPipeline(
+    min_auc=0.55,
+    pvalue_threshold=0.05,
+    max_genes=100,
+    variance_threshold=0.01,
+    seed=42
+)
 
-All datasets were downloaded from the UCSC Xena Browser (https://xenabrowser.net/datapages/). Goldman et al. (2020). Visualizing and interpreting cancer genomics data at the UCSC Xena platform. *Nature Biotechnology*, 38, 675–678. https://doi.org/10.1038/s41587-020-0546-8
+# Load expression data (genes × samples) and binary outcome
+X, y = pipeline.load_data("expression_matrix.tsv", "clinical_data.tsv")
 
-To reproduce results: download expression matrices from the UCSC Xena Browser using the cohort accessions above, align sample identifiers to the frozen split indices in `benchmark/splits/`, and run the benchmark script.
+# Run full pipeline
+results = pipeline.run(X, y, cohort_name="MY_COHORT")
 
----
+# Run with cross-validation
+cv_results = pipeline.run_cv(X, y, n_splits=5, n_repeats=5)
 
-## Environment
-
+# Save all 6 output files
+pipeline.save_results(results, output_dir="results/MY_COHORT/")
 ```
-Python 3.11
-scikit-learn==1.3.0
-numpy==1.24.0
-pandas==2.0.0
-scipy>=1.12
-```
 
----
+## Pipeline Parameters
 
-## What this repository does not include
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `min_auc` | 0.55 | Minimum univariate AUC for gene inclusion |
+| `pvalue_threshold` | 0.05 | Maximum Mann-Whitney p-value for gene inclusion |
+| `max_genes` | 100 | Maximum genes in the fusion panel |
+| `variance_threshold` | 0.01 | Minimum variance for gene retention |
+| `seed` | 42 | Random seed for reproducibility |
+| `n_splits` | 5 | Number of CV folds |
+| `n_repeats` | 5 | Number of CV repeats |
+| `n_bootstrap` | 1000 | Bootstrap resamples for confidence intervals |
 
-This repository is public-safe by design and does **not** include:
+## Output Files
 
-- Raw expression matrices (publicly available at sources above)
-- Proprietary methodology internals
-- Disease-specific commercial biomarker panels
-- Internal research assets or private validation corpora
+Each BPF run produces 6 standardized output files:
 
----
+| File | Description |
+|------|-------------|
+| `DATA.json` | Complete results in machine-readable format |
+| `DETAILED_STATS.txt` | Full statistical report |
+| `EXECUTIVE_SUMMARY.txt` | One-page summary with key metrics |
+| `FULL_AUC_RANKING.txt` | All genes ranked by univariate AUC |
+| `GENE_PANEL.txt` | Selected biomarker panel with directions |
+| `SAMPLES.txt` | Per-patient BPF scores and risk groups |
+
+## Reproducibility
+
+BPF is fully deterministic. Given the same input data, parameters, and seed, the pipeline produces identical results. This is verified by `test_reproducibility.py` which checks bit-for-bit output consistency.
+
+The locked canonical pipeline (`BPF_LOCKED_PIPELINE_v1.py`) is version-controlled and hash-verified via `PIPELINE_AUDIT.json`.
 
 ## Citation
 
-If you use this code or benchmark in your research, please cite:
+If you use BPF in your research, please cite:
 
 ```bibtex
 @article{dowden2026bpf,
-  title={A stability-governed, tuning-free framework for feature selection
-         in high-dimensional transcriptomic biomarker discovery},
+  title={Biomarker Probability Fusion: A Disease-Agnostic Framework for
+         Multi-Modal Biomarker Discovery and Risk Stratification},
   author={Dowden, Christopher B.},
   journal={Bioinformatics},
   year={2026},
-  note={submitted}
+  note={Under review: BIOINF-2026-0795}
+}
+
+@article{dowden2026cbae,
+  title={Computational Bio-AI Engineering: A Compliance-Embedded Framework
+         for Regulatory-Grade Biomarker Validation},
+  author={Dowden, Christopher B.},
+  journal={GigaScience},
+  year={2026},
+  note={Under review: GIGA-D-26-00097}
 }
 ```
 
----
-
-## Author
-
-**Christopher B. Dowden**
-Founder & CEO, PulseLogic Biosciences Inc.
-ceo@pulselogic.bio
-ORCiD: [0009-0008-5690-3723](https://orcid.org/0009-0008-5690-3723)
-
----
-
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+This software is the intellectual property of PulseLogic Biosciences Inc., held through Far Rockaway Ventures IP LLC, and is made available under [LICENSE TERMS TBD — pending IP counsel review].
+
+Protected by provisional patents:
+- US 63/942,422 (BPF Core)
+- US 63/978,445 (AD Extension)
+- US 63/979,043 (PD Extension)
+- US 63/984,186 (CBAE/CEBIS Framework)
+
+## Contact
+
+- **Christopher B. Dowden** — Founder & CEO, PulseLogic Biosciences Inc.
+- Email: ceo@pulselogic.bio
+- Web: [pulselogic.bio](https://pulselogic.bio)
 
 ---
 
-## Design principles
-
-- Deterministic execution
-- Canonical versioning
-- Auditability
-- Reproducibility
-- Public-safe disclosure
+*PulseLogic Biosciences — The Intel Inside for Precision Medicine*
