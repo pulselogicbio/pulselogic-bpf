@@ -202,6 +202,7 @@ Protected by provisional patents:
 ## Contact
 
 - **Christopher B. Dowden** — Founder & CEO, PulseLogic Biosciences Inc.
+- ORCID: [0009-0008-5690-3723](https://orcid.org/0009-0008-5690-3723)
 - Email: ceo@pulselogic.bio
 - Web: [pulselogic.bio](https://pulselogic.bio)
 
