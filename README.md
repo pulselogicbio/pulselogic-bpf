@@ -1,6 +1,6 @@
 # Biomarker Probability Fusion (BPF)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19342790.svg)](https://doi.org/10.5281/zenodo.19342790)
 [![License](https://img.shields.io/badge/License-See%20LICENSE-blue.svg)](LICENSE)
 
 **A disease-agnostic biomarker discovery and risk stratification framework for precision medicine.**
