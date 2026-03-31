@@ -99,7 +99,7 @@ pip install -r requirements.txt
 
 ### Requirements
 
-- Python ≥ 3.9
+- Python >= 3.11
 - NumPy ≥ 1.21
 - Pandas ≥ 1.3
 - Scikit-learn ≥ 1.0

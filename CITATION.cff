@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Biomarker Probability Fusion (BPF)"
+version: v1.0.0
+date-released: 2026-03-30
+url: "https://github.com/pulselogicbio/pulselogic-bpf"
+repository-code: "https://github.com/pulselogicbio/pulselogic-bpf"
+authors:
+  - given-names: Christopher
+    family-names: Dowden
+    email: ceo@pulselogic.bio
+    orcid: https://orcid.org/0009-0008-5690-3723
+    affiliation: "PulseLogic Biosciences Inc."
+keywords:
+  - biomarker discovery
+  - precision medicine
+  - gene expression
+  - risk stratification
+  - machine learning
+abstract: "BPF is a disease-agnostic framework for multi-modal biomarker discovery and patient risk stratification. Validated on 56 independent external datasets comprising 18,143 patients across oncology, Alzheimers disease, and Parkinsons disease."
