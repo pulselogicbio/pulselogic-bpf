@@ -199,6 +199,22 @@ Protected by provisional patents:
 - US 63/979,043 (PD Extension)
 - US 63/984,186 (CBAE/CEBIS Framework)
 
+## Citation
+
+Please cite this work as:
+```bibtex
+@article{dowden2026bpf,
+  title={A stability-governed, tuning-free framework for feature selection
+         in high-dimensional transcriptomic biomarker discovery},
+  author={Dowden, Christopher B.},
+  journal={Bioinformatics},
+  year={2026},
+  note={Submitted. bioRxiv preprint: [DOI pending]}
+}
+```
+
+Alternatively, use the GitHub citation feature (top-right of this repository).
+
 ## Contact
 
 - **Christopher B. Dowden** — Founder & CEO, PulseLogic Biosciences Inc.
