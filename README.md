@@ -1,4 +1,4 @@
-# Biomarker Probability Fusion (BPF)
+﻿# Biomarker Probability Fusion (BPF)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19342790.svg)](https://doi.org/10.5281/zenodo.19342790)
 [![License](https://img.shields.io/badge/License-See%20LICENSE-blue.svg)](LICENSE) [![Python](https://img.shields.io/badge/Python-3.11-green.svg)](https://www.python.org/) [![ORCID](https://img.shields.io/badge/ORCID-0009--0008--5690--3723-brightgreen.svg)](https://orcid.org/0009-0008-5690-3723)
@@ -13,11 +13,11 @@ Developed by [PulseLogic Biosciences Inc.](https://pulselogic.bio) under the dis
 
 Biomarker Probability Fusion (BPF) is a deterministic, auditable pipeline for multi-modal biomarker fusion and patient risk stratification. BPF performs:
 
-1. **Univariate biomarker ranking** — AUC-based discriminative power assessment with direction tracking for each gene/feature
-2. **Adaptive gene selection** — Statistical filtering (AUC threshold + p-value) with configurable panel size
-3. **Weighted score fusion** — AUC-weighted z-score composition with direction correction
-4. **Risk stratification** — Probabilistic patient scoring with bootstrap confidence intervals
-5. **Cross-validation** — 5×5 repeated stratified k-fold with complete within-fold feature selection (no information leakage)
+1. **Univariate biomarker ranking** â€” AUC-based discriminative power assessment with direction tracking for each gene/feature
+2. **Adaptive gene selection** â€” Statistical filtering (AUC threshold + p-value) with configurable panel size
+3. **Weighted score fusion** â€” AUC-weighted z-score composition with direction correction
+4. **Risk stratification** â€” Probabilistic patient scoring with bootstrap confidence intervals
+5. **Cross-validation** â€” 5Ã—5 repeated stratified k-fold with complete within-fold feature selection (no information leakage)
 
 BPF is disease-agnostic: the same algorithm and parameters have been validated across oncology, Alzheimer's disease, and Parkinson's disease without domain-specific modifications.
 
@@ -36,57 +36,57 @@ BPF is disease-agnostic: the same algorithm and parameters have been validated a
 
 ```
 bpf-pipeline/
-├── README.md
-├── LICENSE
-├── CITATION.cff
-├── requirements.txt
-├── setup.py
-│
-├── bpf/                          # Core BPF pipeline
-│   ├── __init__.py
-│   ├── pipeline.py               # BPF v1.0.0 locked canonical pipeline
-│   ├── pipeline_v2.py            # BPF v2.0 (full dataset, no CV)
-│   ├── ranking.py                # Univariate AUC ranking with direction tracking
-│   ├── selection.py              # Adaptive gene selection
-│   ├── fusion.py                 # AUC-weighted z-score fusion
-│   ├── evaluation.py             # Bootstrap CI, risk stratification
-│   └── utils.py                  # Preprocessing, I/O, gene mapping
-│
-├── scripts/                      # Execution scripts
-│   ├── run_single_cohort.py      # Process a single dataset
-│   ├── run_batch.py              # Batch processing across multiple datasets
-│   └── run_cross_validation.py   # 5×5 repeated stratified k-fold
-│
-├── configs/                      # Parameter configurations
-│   ├── default_params.yaml       # Default BPF parameters
-│   ├── oncology_params.yaml      # Phase 1 oncology configuration
-│   ├── alzheimer_params.yaml     # Phase 2 AD configuration
-│   └── parkinson_params.yaml     # Phase 3 PD configuration
-│
-├── data/                         # Sample data for testing
-│   └── sample_expression.csv     # Small synthetic dataset for CI/CD
-│
-├── tests/                        # Unit and integration tests
-│   ├── test_ranking.py
-│   ├── test_selection.py
-│   ├── test_fusion.py
-│   ├── test_pipeline.py
-│   └── test_reproducibility.py   # Determinism verification (seed=42)
-│
-├── results/                      # Output directory (gitignored except examples)
-│   └── example_output/
-│       ├── DATA.json
-│       ├── DETAILED_STATS.txt
-│       ├── EXECUTIVE_SUMMARY.txt
-│       ├── FULL_AUC_RANKING.txt
-│       ├── GENE_PANEL.txt
-│       └── SAMPLES.txt
-│
-└── docs/
-    ├── METHODS.md                # Detailed methodology documentation
-    ├── PARAMETERS.md             # Parameter reference
-    ├── OUTPUT_FORMAT.md          # Output file specifications
-    └── VALIDATION.md             # External validation summary
+â”œâ”€â”€ README.md
+â”œâ”€â”€ LICENSE
+â”œâ”€â”€ CITATION.cff
+â”œâ”€â”€ requirements.txt
+â”œâ”€â”€ setup.py
+â”‚
+â”œâ”€â”€ bpf/                          # Core BPF pipeline
+â”‚   â”œâ”€â”€ __init__.py
+â”‚   â”œâ”€â”€ pipeline.py               # BPF v1.0.0 locked canonical pipeline
+â”‚   â”œâ”€â”€ pipeline_v2.py            # BPF v2.0 (full dataset, no CV)
+â”‚   â”œâ”€â”€ ranking.py                # Univariate AUC ranking with direction tracking
+â”‚   â”œâ”€â”€ selection.py              # Adaptive gene selection
+â”‚   â”œâ”€â”€ fusion.py                 # AUC-weighted z-score fusion
+â”‚   â”œâ”€â”€ evaluation.py             # Bootstrap CI, risk stratification
+â”‚   â””â”€â”€ utils.py                  # Preprocessing, I/O, gene mapping
+â”‚
+â”œâ”€â”€ scripts/                      # Execution scripts
+â”‚   â”œâ”€â”€ run_single_cohort.py      # Process a single dataset
+â”‚   â”œâ”€â”€ run_batch.py              # Batch processing across multiple datasets
+â”‚   â””â”€â”€ run_cross_validation.py   # 5Ã—5 repeated stratified k-fold
+â”‚
+â”œâ”€â”€ configs/                      # Parameter configurations
+â”‚   â”œâ”€â”€ default_params.yaml       # Default BPF parameters
+â”‚   â”œâ”€â”€ oncology_params.yaml      # Phase 1 oncology configuration
+â”‚   â”œâ”€â”€ alzheimer_params.yaml     # Phase 2 AD configuration
+â”‚   â””â”€â”€ parkinson_params.yaml     # Phase 3 PD configuration
+â”‚
+â”œâ”€â”€ data/                         # Sample data for testing
+â”‚   â””â”€â”€ sample_expression.csv     # Small synthetic dataset for CI/CD
+â”‚
+â”œâ”€â”€ tests/                        # Unit and integration tests
+â”‚   â”œâ”€â”€ test_ranking.py
+â”‚   â”œâ”€â”€ test_selection.py
+â”‚   â”œâ”€â”€ test_fusion.py
+â”‚   â”œâ”€â”€ test_pipeline.py
+â”‚   â””â”€â”€ test_reproducibility.py   # Determinism verification (seed=42)
+â”‚
+â”œâ”€â”€ results/                      # Output directory (gitignored except examples)
+â”‚   â””â”€â”€ example_output/
+â”‚       â”œâ”€â”€ DATA.json
+â”‚       â”œâ”€â”€ DETAILED_STATS.txt
+â”‚       â”œâ”€â”€ EXECUTIVE_SUMMARY.txt
+â”‚       â”œâ”€â”€ FULL_AUC_RANKING.txt
+â”‚       â”œâ”€â”€ GENE_PANEL.txt
+â”‚       â””â”€â”€ SAMPLES.txt
+â”‚
+â””â”€â”€ docs/
+    â”œâ”€â”€ METHODS.md                # Detailed methodology documentation
+    â”œâ”€â”€ PARAMETERS.md             # Parameter reference
+    â”œâ”€â”€ OUTPUT_FORMAT.md          # Output file specifications
+    â””â”€â”€ VALIDATION.md             # External validation summary
 ```
 
 ## Installation
@@ -100,11 +100,11 @@ pip install -r requirements.txt
 ### Requirements
 
 - Python >= 3.11
-- NumPy ≥ 1.21
-- Pandas ≥ 1.3
-- Scikit-learn ≥ 1.0
-- SciPy ≥ 1.7
-- XGBoost ≥ 1.5 (optional, for ML-optimized weights)
+- NumPy â‰¥ 1.21
+- Pandas â‰¥ 1.3
+- Scikit-learn â‰¥ 1.0
+- SciPy â‰¥ 1.7
+- XGBoost â‰¥ 1.5 (optional, for ML-optimized weights)
 
 ## Quick Start
 
@@ -120,7 +120,7 @@ pipeline = BPFPipeline(
     seed=42
 )
 
-# Load expression data (genes × samples) and binary outcome
+# Load expression data (genes Ã— samples) and binary outcome
 X, y = pipeline.load_data("expression_matrix.tsv", "clinical_data.tsv")
 
 # Run full pipeline
@@ -164,64 +164,29 @@ Each BPF run produces 6 standardized output files:
 BPF is fully deterministic. Given the same input data, parameters, and seed, the pipeline produces identical results. This is verified by `test_reproducibility.py` which checks bit-for-bit output consistency.
 
 The locked canonical pipeline (`BPF_LOCKED_PIPELINE_v1.py`) is version-controlled and hash-verified via `PIPELINE_AUDIT.json`.
-
-## Citation
-
-If you use BPF in your research, please cite:
-
-```bibtex
-@article{dowden2026bpf,
-  title={Biomarker Probability Fusion: A Disease-Agnostic Framework for
-         Multi-Modal Biomarker Discovery and Risk Stratification},
-  author={Dowden, Christopher B.},
-  journal={Bioinformatics},
-  year={2026},
-  note={Under review: BIOINF-2026-0795}
-}
-
-@article{dowden2026cbae,
-  title={Computational Bio-AI Engineering: A Compliance-Embedded Framework
-         for Regulatory-Grade Biomarker Validation},
-  author={Dowden, Christopher B.},
-  journal={GigaScience},
-  year={2026},
-  note={Under review: GIGA-D-26-00097}
-}
-```
-
-## License
-
-This software is the intellectual property of PulseLogic Biosciences Inc., held through Far Rockaway Ventures IP LLC, and is made available under [LICENSE TERMS TBD — pending IP counsel review].
-
-Protected by provisional patents:
-- US 63/942,422 (BPF Core)
-- US 63/978,445 (AD Extension)
-- US 63/979,043 (PD Extension)
-- US 63/984,186 (CBAE/CEBIS Framework)
-
 ## Citation
 
 Please cite this work as:
 ```bibtex
 @article{dowden2026bpf,
-  title={A stability-governed, tuning-free framework for feature selection
-         in high-dimensional transcriptomic biomarker discovery},
+  title={A stability-governed, tuning-free framework for feature selection in high-dimensional transcriptomic biomarker discovery},
   author={Dowden, Christopher B.},
   journal={Bioinformatics},
   year={2026},
-  note={Submitted. bioRxiv preprint: [DOI pending]}
+  note={Submitted. Manuscript ID: BIOINF-2026-0795}
 }
 ```
 
-Alternatively, use the GitHub citation feature (top-right of this repository).
+**Software citation (for reproducibility artifacts):**
+```bibtex
+@software{dowden2026bpfcode,
+  title={PulseLogic BPF: Biomarker Probability Fusion Pipeline},
+  author={Dowden, Christopher B.},
+  year={2026},
+  url={https://github.com/pulselogicbio/pulselogic-bpf},
+  doi={10.5281/zenodo.19342790},
+  version={1.0.1}
+}
+```
 
-## Contact
-
-- **Christopher B. Dowden** — Founder & CEO, PulseLogic Biosciences Inc.
-- ORCID: [0009-0008-5690-3723](https://orcid.org/0009-0008-5690-3723)
-- Email: ceo@pulselogic.bio
-- Web: [pulselogic.bio](https://pulselogic.bio)
-
----
-
-*PulseLogic Biosciences — The Intel Inside for Precision Medicine*
+Alternatively, click the **"Cite this repository"** button (top-right of this GitHub page) to auto-generate citations from CITATION.cff.
