@@ -1,4 +1,4 @@
-﻿# Biomarker Probability Fusion (BPF)
+# Biomarker Probability Fusion (BPF)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19342790.svg)](https://doi.org/10.5281/zenodo.19342790)
 [![License](https://img.shields.io/badge/License-See%20LICENSE-blue.svg)](LICENSE) [![Python](https://img.shields.io/badge/Python-3.11-green.svg)](https://www.python.org/) [![ORCID](https://img.shields.io/badge/ORCID-0009--0008--5690--3723-brightgreen.svg)](https://orcid.org/0009-0008-5690-3723)
@@ -23,14 +23,17 @@ BPF is disease-agnostic: the same algorithm and parameters have been validated a
 
 ## Validation Summary
 
-| Domain | Training | External Datasets | External Patients | External AUC |
-|--------|----------|-------------------|-------------------|--------------|
-| Oncology | TCGA (39 cohorts) | 41 | 14,498 | 0.8029 |
-| Alzheimer's Disease | ADNI | 7 | 2,892 | ~0.81 |
-| Parkinson's Disease | PPMI | 8 | 753 | 0.793 |
-| **Total** | | **56** | **18,143** | |
+| Domain | Internal Benchmark | External Datasets | External Patients | External Mean AUC |
+|--------|--------------------|-------------------|-------------------|-------------------|
+| Oncology | 39 TCGA + GDC + CGCI cohorts (16,958 patients, mean AUC 0.8077) | 40 | 14,578 | 0.8015 |
+| Alzheimer's Disease | ADNI training reference | 8 | 2,972 | 0.8184 |
+| Parkinson's Disease | PPMI training reference | 8 | 753 | 0.7928 |
+| **External Total** | | **56** | **18,303** | |
+| **Full Portfolio (incl. internal benchmark)** | | **95** | **35,261** | |
 
-56 independent external datasets. 18,143 patients. Three disease domains. 100% statistically significant.
+95 cohorts and datasets. 35,261 patients. Three disease domains. Tier breakdown: 48 GOLD / 24 CONDITIONAL / 23 EXPLORATORY.
+
+Master evidence lock: `SSRN_EVIDENCE_LOCK_v2` (SHA-256: `418c149e9fc541006d3158db69dfd3ebcfd9c9eeaa9be8b954083c69ce5d5f0e`).
 
 ## Repository Structure
 
